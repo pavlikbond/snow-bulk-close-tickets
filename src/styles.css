@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+body {
+  background-color: rgb(233, 244, 252);
+}
+
+.main-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 8vh 5vw 0 5vw;
+}
+
+h1,
+.responses-header {
+  text-align: center;
+  color: #5e5df0;
+  font-weight: 700;
+  font-size: 2.3rem;
+}
+
+.directions {
+  display: block;
+  margin-top: 10px;
+  background-color: #5d5df09c;
+  color: white;
+  padding: 10px 5px;
+  width: 100%;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.form,
+.all-responses-container {
+  width: 500px;
+  height: 500px;
+  padding: 1%;
+  border-radius: 1%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
+  max-height: 90vh;
+  overflow: auto;
+}
+.form {
+  transition: all 0.2s ease;
+  margin-right: 15px;
+}
+
+textarea {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 50%;
+  max-width: 100%;
+  max-height: 50%;
+  resize: vertical;
+  min-height: 20%;
+  outline: none;
+  box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 7px 0px;
+  padding: 8px;
+  border: 1px solid #5d5df09c;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: rgb(60, 60, 60);
+  letter-spacing: 1.05px;
+  font-size: 0.9rem;
+}
+
+textarea:hover {
+  background-color: #e6e6f39c;
+}
+
+textarea::placeholder {
+  font-weight: 700;
+  color: rgb(183, 182, 182);
+}
+
+button {
+  margin-top: 10px;
+  border-radius: 999px;
+  box-shadow: #5d5df08e 0 10px 20px -10px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 25px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  transition: all 0.2s ease;
+  margin-right: 10px;
+  height: 44px;
+}
+
+.submit-btn {
+  background: #5e5df0;
+  border: 2px solid #5e5df0;
+}
+
+.loading-btn {
+  padding: 0 25px;
+  background: #5e5df0;
+  border: 2px solid #5e5df0;
+}
+
+.clear-btn,
+.print-csv-btn {
+  background: white;
+  color: #5e5df0;
+  border: 2px solid #5e5df0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.print-csv-btn {
+  margin-top: 0;
+}
+.submit-btn:hover {
+  background: #5454f1;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.response {
+  background-color: #5d5df021;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: rgba(112, 112, 116, 0.05) 0px 7px 7px 0px;
+  color: rgb(60, 60, 60);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.response:hover {
+  transform: scale(1.01);
+}
+
+.response .ticket-number {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.all-responses-container {
+  height: auto;
+}
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 10px);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  color: black;
+  transform: scale(1.2);
+}
+
+/* Medium screen devices (768px and above) */
+@media only screen and (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .all-responses-container {
+    margin-top: 5%;
+  }
+}
