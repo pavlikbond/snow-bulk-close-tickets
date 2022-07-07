@@ -29,7 +29,7 @@ function App() {
     }
 
     //clean the commas and spaces and turn into an array of ticket numbers
-    let commas = rawInput.split(" ");
+    let commas = rawInput.split(/[\n\s,]+/);
     const results = commas.map((element) => {
       return element.trim().replace(",", "");
     });
@@ -76,7 +76,7 @@ function App() {
         <textarea
           className="incidents"
           placeholder="INC12345, INC12345, INC12345, INC12345"
-          value="INC111111, INC122222, INC123333, INC144444"
+          //value="INC111111, INC122222, INC123333, INC144444"
         ></textarea>
         <div className="button-container">
           <button className="clear-btn" onClick={clear}>
