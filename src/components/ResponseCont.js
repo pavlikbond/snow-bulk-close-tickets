@@ -3,78 +3,75 @@ import IndividualResponse from "./individualResponse";
 import { motion } from "framer-motion";
 
 const ResponseCont = ({ responses, onDelete }) => {
-  //convert visible responses to a csv file and download it
-  const downloadCSV = (responses) => {
-    //turns the responses array of objects into a CSV string
-    const csvString = [
-      ["Ticket Number", "Response Message", "TimeStamp"], //headers
-      ...responses.map((item) => [
-        item.ticketNum,
-        item.response,
-        item.timestamp,
-      ]),
-    ]
-      .map((e) => e.join(","))
-      .join("\n");
+    //convert visible responses to a csv file and download it
+    const downloadCSV = (responses) => {
+        //turns the responses array of objects into a CSV string
+        const csvString = [
+            ["Ticket Number", "Response Message", "TimeStamp"], //headers
+            ...responses.map((item) => [
+                item.ticketNum,
+                item.snowResponse.join("   ").replace(",", " "),
+                item.timestamp,
+            ]),
+        ]
+            .map((e) => e.join(","))
+            .join("\n");
 
-    //add data type to beginning of string
-    let csvContent = "data:text/csv;charset=utf-8," + csvString;
-    //generate an invisible a tag
-    let encodedUri = encodeURI(csvContent);
-    let link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "SNOW_bulk_close.csv"); //put any name you want
-    document.body.appendChild(link); // Required for FF
+        //add data type to beginning of string
+        let csvContent = "data:text/csv;charset=utf-8," + csvString;
+        //generate an invisible a tag
+        let encodedUri = encodeURI(csvContent);
+        let link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "SNOW_bulk_close.csv"); //put any name you want
+        document.body.appendChild(link); // Required for FF
 
-    link.click();
-  };
+        link.click();
+    };
 
-  //animation logic to animate the responses container and stagger children
-  const variants = {
-    hidden: {
-      onpacity: 0.5,
-    },
-    visible: {
-      onpacity: 1,
-      transition: {
-        when: "beforeChildren",
-        staggerChildren: 0.1,
-      },
-    },
-  };
+    //animation logic to animate the responses container and stagger children
+    const variants = {
+        hidden: {
+            onpacity: 0.5,
+        },
+        visible: {
+            onpacity: 1,
+            transition: {
+                when: "beforeChildren",
+                staggerChildren: 0.1,
+            },
+        },
+    };
 
-  //each response appears
-  const childVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.98,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-    },
-  };
+    //each response appears
+    const childVariants = {
+        hidden: {
+            opacity: 0,
+            scale: 0.98,
+        },
+        visible: {
+            opacity: 1,
+            scale: 1,
+        },
+    };
 
-  return (
-    <div>
-      <h3 className="responses-header">Responses</h3>
-      <div>
-        <button
-          className="print-csv-btn"
-          onClick={() => downloadCSV(responses)}
-        >
-          Download CSV
-        </button>
-      </div>
-      <motion.div variants={variants} initial="hidden" animate="visible">
-        {responses.map((response) => (
-          <motion.div variants={childVariants} key={response.ticketNum}>
-            <IndividualResponse response={response} onDelete={onDelete} />
-          </motion.div>
-        ))}
-      </motion.div>
-    </div>
-  );
+    return (
+        <div>
+            <h3 className="responses-header">Responses</h3>
+            <div>
+                <button className="print-csv-btn" onClick={() => downloadCSV(responses)}>
+                    Download CSV
+                </button>
+            </div>
+            <motion.div variants={variants} initial="hidden" animate="visible">
+                {responses.map((response) => (
+                    <motion.div variants={childVariants} key={response.uuid}>
+                        <IndividualResponse response={response} onDelete={onDelete} />
+                    </motion.div>
+                ))}
+            </motion.div>
+        </div>
+    );
 };
 
 export default ResponseCont;

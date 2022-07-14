@@ -1,0 +1,28 @@
+const sf = require("./snowFetcher.js");
+
+exports.handler = async (event, context) => {
+    let response = {};
+
+    if (event.ticketNumbers.length > 0) {
+        let responsesFromSnow = [];
+
+        //loop and call the snow resolve API for each ticket number
+        for (let ticketNum of event.ticketNumbers) {
+            let result = await sf.resolver(ticketNum, event.environment);
+            responsesFromSnow.push(result); //gather each response from each API call
+        }
+
+        //return a list of all responses
+        response = {
+            statusCode: 200,
+            body: responsesFromSnow,
+        };
+    } else {
+        response = {
+            statusCode: 200,
+            body: JSON.stringify("No tickets received"),
+        };
+    }
+
+    return response;
+};
