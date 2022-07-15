@@ -7,11 +7,12 @@ const ResponseCont = ({ responses, onDelete }) => {
     const downloadCSV = (responses) => {
         //turns the responses array of objects into a CSV string
         const csvString = [
-            ["Ticket Number", "Response Message", "TimeStamp"], //headers
+            ["Ticket Number", "TimeStamp", "Response Info", "Response Errors"], //headers
             ...responses.map((item) => [
                 item.ticketNum,
-                item.snowResponse.join("   ").replace(",", " "),
                 item.timestamp,
+                item.snowResponse.join("  ---  ").replaceAll(", ", " "),
+                item.errors.join("  ---  ").replaceAll(",", " "),
             ]),
         ]
             .map((e) => e.join(","))
