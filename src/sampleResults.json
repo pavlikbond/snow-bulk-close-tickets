@@ -35,13 +35,9 @@
         },
         {
             "result": {
-                "info": [
-                    "Auto Close set to true, Next Action set to Auto Close.",
-                    "SRT Date set to (UTC): 13-Jul-22 19:00:00",
-                    "Incident Resolved."
-                ],
+                "info": [],
                 "warnings": [],
-                "errors": [],
+                "errors": ["Incident not found"],
                 "check_only": false,
                 "force_update": true,
                 "can_update": true,

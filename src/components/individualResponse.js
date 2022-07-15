@@ -1,5 +1,6 @@
 import React from "react";
 import { FaTimes } from "react-icons/fa";
+import { BsDot } from "react-icons/bs";
 import { motion } from "framer-motion";
 
 const IndividualResponse = ({ response, onDelete }) => {
@@ -9,8 +10,18 @@ const IndividualResponse = ({ response, onDelete }) => {
             <div className="response-message">
                 {response.snowResponse.map((note, index) => {
                     return (
-                        <div key={index} className={note.startsWith("Incident Resolved") ? "resolved" : "note"}>
-                            {index + 1 + ". "}
+                        <div key={index} className={note.startsWith("Incident Resolved") ? "resolved shadow" : "note"}>
+                            <BsDot className="inline" />
+                            {note}
+                        </div>
+                    );
+                })}
+            </div>
+            <div className="response-message">
+                {response.errors.map((note, index) => {
+                    return (
+                        <div key={index} className="bg-error inline-block rounded pr-2 py-1 shadow">
+                            <BsDot className="inline" />
                             {note}
                         </div>
                     );

@@ -4,8 +4,10 @@
     box-sizing: border-box;
     font-family: "Lato", sans-serif;
 }
+
 body {
     background-color: rgb(233, 244, 252);
+    height: 100vh;
 }
 
 .main-container {
@@ -17,7 +19,7 @@ body {
 h1,
 .responses-header {
     text-align: center;
-    color: #5e5df0;
+    color: #570df8;
     font-weight: 700;
     font-size: 2.3rem;
 }
@@ -38,7 +40,7 @@ h1,
 .form,
 .all-responses-container {
     width: 500px;
-    height: 500px;
+    height: 600px;
     padding: 1%;
     border-radius: 1%;
     background-color: rgb(255, 255, 255);
@@ -82,7 +84,7 @@ textarea::placeholder {
 
 button {
     margin-top: 10px;
-    border-radius: 999px;
+    border-radius: 10px;
     box-shadow: #5d5df08e 0 10px 20px -10px;
     color: #ffffff;
     cursor: pointer;
@@ -104,21 +106,21 @@ button {
 }
 
 .submit-btn {
-    background: #5e5df0;
-    border: 2px solid #5e5df0;
+    background: #570df8;
+    border: 2px solid #570df8;
 }
 
 .loading-btn {
     padding: 0 25px;
-    background: #5e5df0;
-    border: 2px solid #5e5df0;
+    background: #570df8;
+    border: 2px solid #570df8;
 }
 
 .clear-btn,
 .print-csv-btn {
     background: white;
-    color: #5e5df0;
-    border: 2px solid #5e5df0;
+    color: #570df8;
+    border: 2px solid #570df8;
 }
 
 .button-container {
@@ -129,12 +131,9 @@ button {
 .print-csv-btn {
     margin-top: 0;
 }
-.submit-btn:hover {
-    background: #5454f1;
-}
 
 button:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .response {
@@ -164,7 +163,7 @@ button:hover {
 .close-btn {
     position: absolute;
     right: 10px;
-    top: calc(50% - 10px);
+    top: 10px;
     font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -194,9 +193,24 @@ button:hover {
     .main-container {
         flex-direction: column;
         justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .form,
+    .all-responses-container {
+        width: 90vw;
+        min-width: 375px;
     }
 
     .all-responses-container {
         margin-top: 5%;
+    }
+
+    button {
+        font-size: 80%;
+        padding-left: 12px;
+        padding-right: 12px;
+        white-space: nowrap;
     }
 }
