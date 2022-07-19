@@ -142,7 +142,6 @@ button:hover {
     padding: 10px;
     margin: 10px 0;
     box-shadow: rgba(112, 112, 116, 0.05) 0px 7px 7px 0px;
-    color: rgb(60, 60, 60);
     position: relative;
     transition: all 0.3s ease;
 }

@@ -5,7 +5,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { TailSpin } from "react-loader-spinner";
-import sampleResults from "./sampleResults.json";
 import { v4 as uuidv4 } from "uuid";
 import Radios from "./components/Radios";
 import { BiError } from "react-icons/bi";
@@ -13,8 +12,8 @@ import { BiError } from "react-icons/bi";
 let fakeResponses = ["Ticket Close Sucessful", "Ticket Close Failed", "Ticket Not Found"];
 
 function App() {
-    let environment;
-    let version;
+    let [environment, setEnvironment] = useState("Test");
+    let [version, setVersion] = useState("V1");
     const [responses, setResponses] = useState([]);
     const [isLoading, setLoading] = useState(false);
     const [formInput, setFormInput] = useState("");
@@ -26,8 +25,12 @@ function App() {
     };
 
     let changeVersionAndEnvironment = (v, e) => {
-        environment = e;
-        version = v;
+        setEnvironment(() => {
+            return e;
+        });
+        setVersion(() => {
+            return v;
+        });
     };
 
     async function handler() {
@@ -69,13 +72,14 @@ function App() {
                 })
                     .then((response) => response.json()) //convert response
                     .then((data) => {
+                        console.log(data);
                         let tempList = [];
                         //for each reponse create an object
                         for (let item of data.body) {
                             tempList.push({
-                                ticketNum: item.result.number,
-                                snowResponse: item.result.info,
-                                errors: item.result.errors,
+                                ticketNum: "number" in item.result ? item.result.number : "",
+                                snowResponse: "info" in item.result ? item.result.info : [],
+                                errors: "errors" in item.result ? item.result.errors : [],
                                 timestamp: Date().toString().substring(0, 24),
                                 uuid: uuidv4(), //unique id used for deleting values
                             });
@@ -84,6 +88,9 @@ function App() {
                         setLoading(false);
                     });
             } catch (error) {
+                setError(() => {
+                    return "Retrying...";
+                });
                 const isLastAttemp = i + 1 === n;
                 if (isLastAttemp) {
                     console.log(error);
@@ -102,7 +109,7 @@ function App() {
     };
 
     return (
-        <div className="main-container">
+        <div className="main-container text-gray-600">
             <motion.div className="form">
                 <h1>SNOW Bulk Close</h1>
                 <Radios updateVandE={changeVersionAndEnvironment} />

@@ -1,21 +1,16 @@
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-exports.resolver = async (ticketNum, environment) => {
+exports.resolver = async (ticketNum, url) => {
     let data;
 
-    let env = environment === "Prod" ? "" : "test";
-
-    let result = await fetch(
-        `https://ensono${env}.service-now.com/api/x_aito_rest_provid/v2/generic/incident/resolve/${ticketNum}`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Basic QVdTSW50ZWdyYXRpb246Tis/QjQnTSVeQjU9dTZWS1paJFg=",
-            },
-            body: JSON.stringify(formatTicketToResolvedSCRAPI()),
-        }
-    )
+    let result = await fetch(url + ticketNum, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Basic QVdTSW50ZWdyYXRpb246Tis/QjQnTSVeQjU9dTZWS1paJFg=",
+        },
+        body: JSON.stringify(formatTicketToResolvedSCRAPI()),
+    })
         .then((response) => response.json())
         .then((_data) => (data = _data))
         .catch((error) => {
