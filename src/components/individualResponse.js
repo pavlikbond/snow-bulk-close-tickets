@@ -9,8 +9,9 @@ const IndividualResponse = ({ response, onDelete }) => {
             <span className="ticket-number">{response.ticketNum}</span>
             <div className="response-message">
                 {response.snowResponse.map((note, index) => {
+                    let check = note.toLowerCase();
                     return (
-                        <div key={index} className={note.startsWith("Incident Resolved") ? "resolved shadow" : "note"}>
+                        <div key={index} className={check.includes("resolved") ? "resolved shadow" : "note"}>
                             <BsDot className="inline" />
                             {note}
                         </div>

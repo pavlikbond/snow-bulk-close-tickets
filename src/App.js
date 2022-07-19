@@ -1,7 +1,7 @@
 import "./index.css";
 import "./styles.css";
 import ResponseCont from "./components/ResponseCont.js";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { TailSpin } from "react-loader-spinner";
@@ -17,7 +17,9 @@ function App() {
     const [responses, setResponses] = useState([]);
     const [isLoading, setLoading] = useState(false);
     const [formInput, setFormInput] = useState("");
+    const [currentResponse, setCurrentResponse] = useState(null);
     const [error, setError] = useState("");
+    const didMount = useRef(false);
 
     //read the input and update the state
     let formInputHandler = (e) => {
@@ -32,6 +34,24 @@ function App() {
             return v;
         });
     };
+
+    //cleans raw input and returns an array of ticket numbers
+    function cleanRawInput(rawInput) {
+        //clean the commas, newlines, and spaces and turn into an array of ticket numbers
+        let splitResult = rawInput.split(/[\n\s,]+/);
+        const results = splitResult.map((element) => {
+            return element.trim().replace(",", "");
+        });
+        return results;
+    }
+
+    useEffect(() => {
+        if (didMount.current) {
+            setResponses([...responses, currentResponse]);
+        } else {
+            didMount.current = true;
+        }
+    }, [currentResponse]);
 
     async function handler() {
         setLoading(true); //initiating loading circle animation
@@ -53,54 +73,55 @@ function App() {
             return; // if nothing was entered into the textarea do nothing
         }
 
-        //clean the commas, newlines, and spaces and turn into an array of ticket numbers
-        let splitResult = rawInput.split(/[\n\s,]+/);
-        const results = splitResult.map((element) => {
-            return element.trim().replace(",", "");
-        });
+        let results = cleanRawInput(rawInput);
 
-        let n = 5; // number of times to retry calling the API lambda
-        //loop and retry calling the API, display error if still fails after all attempts
-        for (let i = 0; i < n; i++) {
-            try {
-                return await fetch("https://smconnect.ensono.com/bulkCloseTickets", {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ environment: environment, version: version, ticketNumbers: results }),
-                })
-                    .then((response) => response.json()) //convert response
-                    .then((data) => {
-                        console.log(data);
-                        let tempList = [];
-                        //for each reponse create an object
-                        for (let item of data.body) {
-                            tempList.push({
-                                ticketNum: "number" in item.result ? item.result.number : "",
-                                snowResponse: "info" in item.result ? item.result.info : [],
-                                errors: "errors" in item.result ? item.result.errors : [],
-                                timestamp: Date().toString().substring(0, 24),
-                                uuid: uuidv4(), //unique id used for deleting values
+        //call lambda separately for each ticket number
+        for (let ticketNum of results) {
+            let done = false;
+            let retries = 5;
+            for (let i = 0; i < retries; i++) {
+                if (!done) {
+                    try {
+                        await fetch("https://smconnect.ensono.com/bulkCloseTickets", {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ environment: environment, version: version, ticketNum: ticketNum }),
+                        })
+                            .then((response) => response.json()) //convert response
+                            .then((item) => {
+                                console.log(item);
+
+                                let newResponse = {
+                                    ticketNum: "number" in item.result ? item.result.number : ticketNum,
+                                    snowResponse: item.result.info,
+                                    errors: item.result.errors,
+                                    timestamp: Date().toString().substring(0, 24),
+                                    uuid: uuidv4(), //unique id used for deleting values
+                                };
+                                setCurrentResponse(newResponse);
+                                done = true;
+                                //r.push(newResponse);
+                            });
+                    } catch (error) {
+                        setError(() => {
+                            return "Retrying...";
+                        });
+                        const isLastAttemp = i + 1 === retries;
+                        if (isLastAttemp) {
+                            console.log(error);
+                            setLoading(false);
+                            setError(() => {
+                                return `Failed for ticket number: ${ticketNum}`;
                             });
                         }
-                        setResponses([...responses, ...tempList]);
-                        setLoading(false);
-                    });
-            } catch (error) {
-                setError(() => {
-                    return "Retrying...";
-                });
-                const isLastAttemp = i + 1 === n;
-                if (isLastAttemp) {
-                    console.log(error);
-                    setLoading(false);
-                    setError(() => {
-                        return "Error connecting to Lambda";
-                    });
+                    }
                 }
             }
         }
+        setLoading(false);
+        //setResponses([...r]);
     }
 
     //deletes a response card when user clicks 'x'
@@ -111,7 +132,7 @@ function App() {
     return (
         <div className="main-container text-gray-600">
             <motion.div className="form">
-                <h1>SNOW Bulk Close</h1>
+                <h1>SNOW Bulk Ticket Close</h1>
                 <Radios updateVandE={changeVersionAndEnvironment} />
                 <span className="directions">Enter ticket numbers separated by commas or spaces</span>
                 <textarea
@@ -135,7 +156,7 @@ function App() {
                         </button>
                     )}
                     {error && (
-                        <div className="bg-red-300 text-red-700 rounded shadow mt-2.5 p-2 inline-block">
+                        <div className="bg-red-300 text-red-700 rounded shadow mt-2.5 p-2 inline-block text-sm md:text-base">
                             <BiError className="inline mr-1" />
                             {error}
                         </div>
