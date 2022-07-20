@@ -1,26 +1,57 @@
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
+const V1AUTH = process.env.V1AUTH;
+const V2AUTH = process.env.V2AUTH;
+const v1TestURL = process.env.V1TestURL;
+const v1ProdURL = process.env.V1ProdURL;
+const v2TestURL = process.env.V2TestURL;
+const v2ProdURL = process.env.V2ProdURL;
 
-exports.resolver = async (ticketNum, url) => {
+let getUrl = (version, env, ticketNum) => {
+    let url;
+
+    if (version === "V1") {
+        if (env === "Prod") {
+            url = "https://" + v1ProdURL + ticketNum;
+        } else {
+            url = "https://" + v1TestURL + ticketNum;
+        }
+    } else if (version === "V2") {
+        if (env === "Prod") {
+            url = "https://" + v2ProdURL;
+        } else {
+            url = "https://" + v2TestURL;
+        }
+    }
+    return url;
+};
+
+exports.resolver = async (ticketNum, version, environment) => {
     let data;
+    let url = getUrl(version, environment, ticketNum);
 
-    let result = await fetch(url + ticketNum, {
+    console.log(url);
+
+    let result = await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: "Basic QVdTSW50ZWdyYXRpb246Tis/QjQnTSVeQjU9dTZWS1paJFg=",
+            "cache-control": "non-cache",
+            Authorization: version === "V1" ? V1AUTH : V2AUTH,
         },
-        body: JSON.stringify(formatTicketToResolvedSCRAPI()),
+        body: JSON.stringify(
+            version === "V1" ? formatTicketToResolvedSCRAPIV1() : formatTicketToResolvedSCRAPIV2(ticketNum)
+        ),
     })
         .then((response) => response.json())
         .then((_data) => (data = _data))
         .catch((error) => {
-            console.log(error);
+            data = error;
         });
 
     return data;
 };
 
-let formatTicketToResolvedSCRAPI = function (currentAssignee = "AWSIntegration") {
+let formatTicketToResolvedSCRAPIV1 = function (currentAssignee = "AWSIntegration") {
     var updateJSON = {};
     var today = new Date();
     updateJSON.state = 6;
@@ -43,5 +74,19 @@ let formatTicketToResolvedSCRAPI = function (currentAssignee = "AWSIntegration")
     updateJSON.check_only = "false";
     updateJSON.force_update = "true";
 
+    return updateJSON;
+};
+
+let formatTicketToResolvedSCRAPIV2 = function (ticketNum) {
+    var updateJSON = {};
+    //var today = (new Date()); //not used
+    updateJSON.number = ticketNum;
+    updateJSON.close_notes = "Ticket resolved via client integration";
+    updateJSON.resolution_code = "Closed/Resolved by Caller"; //'Solved (Permanently)';
+    updateJSON.assigned_to = "Envision Connect Integration";
+    updateJSON.check_only = "false";
+    updateJSON.force_update = "true";
+    updateJSON.comments = "Envision Connect Integration";
+    console.log(updateJSON);
     return updateJSON;
 };
