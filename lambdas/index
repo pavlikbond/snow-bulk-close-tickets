@@ -1,8 +1,4 @@
 const sf = require("./snowFetcher.js");
-const v1TestURL = process.env.V1TestURL;
-const v1ProdURL = process.env.V1ProdURL;
-const v2TestURL = process.env.V2TestURL;
-const v2ProdURL = process.env.V2ProdURL;
 
 exports.handler = async (event, context, other) => {
     let response = {};
@@ -10,11 +6,9 @@ exports.handler = async (event, context, other) => {
     if (event.ticketNumbers.length > 0) {
         let responsesFromSnow = [];
 
-        let url = getUrl(event.environment, event.version);
-
         //loop and call the snow resolve API for each ticket number
         for (let ticketNum of event.ticketNumbers) {
-            let result = await sf.resolver(ticketNum, url);
+            let result = await sf.resolver(ticketNum, event.version, event.environment);
             responsesFromSnow.push(result); //gather each response from each API call
         }
 
@@ -30,23 +24,4 @@ exports.handler = async (event, context, other) => {
     }
 
     return response;
-};
-
-let getUrl = (env, version) => {
-    let url;
-
-    if (version === "V1") {
-        if (env === "Prod") {
-            url = v1ProdURL;
-        } else {
-            url = v1TestURL;
-        }
-    } else if (version === "V2") {
-        if (env === "Prod") {
-            url = v2ProdURL;
-        } else {
-            url = v2TestURL;
-        }
-    }
-    return url;
 };

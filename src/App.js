@@ -14,6 +14,7 @@ let fakeResponses = ["Ticket Close Sucessful", "Ticket Close Failed", "Ticket No
 function App() {
     let [environment, setEnvironment] = useState("Test");
     let [version, setVersion] = useState("V1");
+    let [state, setState] = useState("resolve");
     const [responses, setResponses] = useState([]);
     const [isLoading, setLoading] = useState(false);
     const [formInput, setFormInput] = useState("");
@@ -26,12 +27,16 @@ function App() {
         setFormInput(e.target.value);
     };
 
-    let changeVersionAndEnvironment = (v, e) => {
+    //updates the state, version, and environment when user interacts
+    let changeRadios = (v, e, s) => {
         setEnvironment(() => {
             return e;
         });
         setVersion(() => {
             return v;
+        });
+        setState(() => {
+            return s;
         });
     };
 
@@ -45,6 +50,7 @@ function App() {
         return results;
     }
 
+    //skip when page loaded, but whenever currrentResponse changes, update responses
     useEffect(() => {
         if (didMount.current) {
             setResponses([...responses, currentResponse]);
@@ -52,6 +58,15 @@ function App() {
             didMount.current = true;
         }
     }, [currentResponse]);
+
+    //in case you want the enter key to trigger the submit button
+    const handleKeypress = (e) => {
+        //it triggers by pressing the enter key
+        // if (e.key === "Enter") {
+        //     e.preventDefault();
+        //     handler();
+        // }
+    };
 
     async function handler() {
         setLoading(true); //initiating loading circle animation
@@ -86,8 +101,14 @@ function App() {
                             method: "PUT",
                             headers: {
                                 "Content-Type": "application/json",
+                                //"X-Api-Key": "CpZ3HkIXqX5oJ1F0ocdm86JcRlR9h5dO5wX9htGB",
                             },
-                            body: JSON.stringify({ environment: environment, version: version, ticketNum: ticketNum }),
+                            body: JSON.stringify({
+                                environment: environment,
+                                version: version,
+                                ticketNum: ticketNum,
+                                state: state,
+                            }),
                         })
                             .then((response) => response.json()) //convert response
                             .then((item) => {
@@ -102,6 +123,10 @@ function App() {
                                 };
                                 setCurrentResponse(newResponse);
                                 done = true;
+                                setError(() => {
+                                    //clear out errors if there was one
+                                    return "";
+                                });
                                 //r.push(newResponse);
                             });
                     } catch (error) {
@@ -132,14 +157,15 @@ function App() {
     return (
         <div className="main-container text-gray-600">
             <motion.div className="form">
-                <h1>SNOW Bulk Ticket Close</h1>
-                <Radios updateVandE={changeVersionAndEnvironment} />
+                <h1>Close Tickets</h1>
+                <Radios changeRadios={changeRadios} />
                 <span className="directions">Enter ticket numbers separated by commas or spaces</span>
                 <textarea
                     onChange={formInputHandler}
                     className="incidents"
                     placeholder="INC1234567, INC1234567, INC1234567, INC1234567"
                     value={formInput}
+                    onKeyPress={handleKeypress}
                 ></textarea>
                 <div className="button-container">
                     <button className="clear-btn" onClick={() => setFormInput(() => "")}>

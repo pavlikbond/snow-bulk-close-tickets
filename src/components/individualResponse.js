@@ -4,14 +4,25 @@ import { BsDot } from "react-icons/bs";
 import { motion } from "framer-motion";
 
 const IndividualResponse = ({ response, onDelete }) => {
+    //className={check.includes("resolved") ? "resolved shadow" : "note"}
+    let check = (note) => {
+        note = note.toLowerCase();
+        if (note.includes("cannot") || note.includes("unable")) {
+            return "bg-error shadow rounded";
+        } else if (note.includes("resolved") || note.includes("was cancelled") || note.includes("has been cancelled")) {
+            return "resolved shadow";
+        } else {
+            return "note";
+        }
+    };
+
     return (
         <motion.div className="response">
             <span className="ticket-number">{response.ticketNum}</span>
             <div className="response-message">
                 {response.snowResponse.map((note, index) => {
-                    let check = note.toLowerCase();
                     return (
-                        <div key={index} className={check.includes("resolved") ? "resolved shadow" : "note"}>
+                        <div key={index} className={check(note)}>
                             <BsDot className="inline" />
                             {note}
                         </div>
