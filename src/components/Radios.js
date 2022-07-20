@@ -1,10 +1,11 @@
-import { Container } from "postcss";
 import { useState } from "react";
+import Modal from "./Modal";
 
 const Radios = ({ changeRadios }) => {
     const [environment, setEnvironment] = useState("Test");
     const [version, setVersion] = useState("V1");
     const [state, setState] = useState("resolve");
+    const [modalState, setModalState] = useState("");
 
     let handleEnvironment = (e) => {
         setEnvironment(e.target.value);
@@ -20,8 +21,17 @@ const Radios = ({ changeRadios }) => {
         changeRadios(version, environment, e.target.value);
     };
 
+    function openModal(e) {
+        if (environment === "Prod") {
+            return;
+        }
+        e.preventDefault();
+        setModalState("modal-open");
+    }
+
     return (
         <div className="radios-container flex justify-between">
+            <Modal setEnvironment={setEnvironment} modalState={modalState} setModalState={setModalState} />
             <div className="options-container">
                 <div className="btn-group inline-block">
                     <div className="py-1 font-bold">
@@ -39,6 +49,7 @@ const Radios = ({ changeRadios }) => {
                     <input
                         value="Prod"
                         onChange={handleEnvironment}
+                        onClick={openModal}
                         type="radio"
                         name="environment"
                         data-title="Prod"
