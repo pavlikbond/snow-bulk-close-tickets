@@ -7,7 +7,7 @@
 
 body {
     background-color: rgb(233, 244, 252);
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .main-container {
@@ -45,9 +45,14 @@ h1,
     border-radius: 1%;
     background-color: rgb(255, 255, 255);
     box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
-    max-height: 85vh;
+
     overflow: auto;
 }
+
+.form {
+    max-height: fit-content;
+}
+
 .form {
     transition: all 0.2s ease;
     margin-right: 15px;
@@ -59,7 +64,7 @@ textarea {
     width: 100%;
     height: 300px;
     max-width: 100%;
-    max-height: 50%;
+    max-height: 300px;
     resize: vertical;
     min-height: 200px;
     outline: none;
@@ -195,17 +200,22 @@ button:hover {
         flex-direction: column;
         justify-content: center;
         width: 100%;
-        height: 100%;
+
+        padding: 10px;
     }
 
     .form,
     .all-responses-container {
         width: 90vw;
-        min-width: 375px;
+        min-width: 350px;
     }
     .form {
-        overflow: hidden;
+        overflow: auto;
+        min-height: none;
         height: fit-content;
+        min-width: 450px;
+        margin-right: 0;
+        max-height: fit-content;
     }
 
     .all-responses-container {
