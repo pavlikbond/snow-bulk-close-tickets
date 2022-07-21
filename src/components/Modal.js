@@ -36,6 +36,7 @@ const Modal = ({ setEnvironment, modalState, setModalState }) => {
         setModalState("");
         setEnvironment("Test");
         setConfirmValue("");
+        setBorder("input-primary");
     }
 
     //when user clicks enter check input
@@ -49,18 +50,21 @@ const Modal = ({ setEnvironment, modalState, setModalState }) => {
 
     return (
         <>
-            <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+            <input type="checkbox" id="my-modal-1" className="modal-toggle" />
             <div className={"modal " + modalState}>
                 <div className="modal-box relative">
                     <label
-                        htmlFor="my-modal-3"
+                        htmlFor="my-modal-1"
                         className="btn btn-sm btn-circle absolute right-2 top-2"
                         onClick={removeModal}
                     >
                         ✕
                     </label>
                     <h3 className="text-lg font-bold">Wait!</h3>
-                    <p className="py-4 text-lg">You are about to select the "Production" environment!</p>
+                    <p className="py-4 text-lg">
+                        You are about to select the <span className="font-bold underline">"Production"</span>{" "}
+                        environment!
+                    </p>
                     <div className="flex mb-4">
                         <p className="">
                             Type <span className="italic inline-block mr-1">Confirm</span> to continue
@@ -76,10 +80,10 @@ const Modal = ({ setEnvironment, modalState, setModalState }) => {
                         />
                     </div>
                     <div className="flex justify-end">
-                        <label htmlFor="my-modal-3" className="btn btn-outline mr-3" onClick={removeModal}>
+                        <label htmlFor="my-modal-1" className="btn btn-outline mr-3" onClick={removeModal}>
                             Cancel
                         </label>
-                        <label htmlFor="my-modal-3" className="btn btn-primary" onClick={confirmBtnHandler}>
+                        <label htmlFor="my-modal-1" className="btn btn-primary" onClick={confirmBtnHandler}>
                             Confirm
                         </label>
                     </div>
