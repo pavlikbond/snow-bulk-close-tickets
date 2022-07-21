@@ -1,3 +1,4 @@
+import { Input } from "./components/Input";
 import "./index.css";
 import "./styles.css";
 import ResponseCont from "./components/ResponseCont.js";
@@ -21,6 +22,7 @@ function App() {
     const [currentResponse, setCurrentResponse] = useState(null);
     const [error, setError] = useState("");
     const didMount = useRef(false);
+    const [closeNotes, setCloseNotes] = useState("");
 
     //read the input and update the state
     let formInputHandler = (e) => {
@@ -108,6 +110,7 @@ function App() {
                                 version: version,
                                 ticketNum: ticketNum,
                                 state: state,
+                                closeNotes: closeNotes.trim(),
                             }),
                         })
                             .then((response) => response.json()) //convert response
@@ -167,8 +170,15 @@ function App() {
                     value={formInput}
                     onKeyPress={handleKeypress}
                 ></textarea>
+                <Input setCloseNotes={setCloseNotes} closeNotes={closeNotes} />
                 <div className="button-container">
-                    <button className="clear-btn" onClick={() => setFormInput(() => "")}>
+                    <button
+                        className="clear-btn"
+                        onClick={() => {
+                            setFormInput(() => "");
+                            setCloseNotes("");
+                        }}
+                    >
                         Clear
                     </button>
                     {!isLoading && (
