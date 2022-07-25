@@ -56,15 +56,62 @@ const ResponseCont = ({ responses, onDelete, retryApi, isClicked, setIsClicked }
         },
     };
 
+    let progressVals = {
+        max: responses.length,
+        success: 0,
+        failed: responses.filter(({ errors }) => errors.length > 0).length,
+    };
+
+    for (let response of responses) {
+        if (response.snowResponse === []) {
+            continue;
+        } else {
+            let note = response.snowResponse.join();
+            note = note.toLowerCase();
+            if (note.includes("cannot") || note.includes("unable")) {
+                progressVals.failed++;
+            } else if (
+                note.includes("resolved") ||
+                note.includes("was cancelled") ||
+                note.includes("has been cancelled")
+            ) {
+                progressVals.success++;
+            }
+        }
+    }
+
     return (
-        <div>
+        <>
             <h3 className="responses-header">Responses</h3>
-            <div>
+            <div className="flex flex-col">
                 <button className="print-csv-btn" onClick={() => downloadCSV(responses)}>
                     Download CSV
                 </button>
+                <div className="flex flex-col font-bold pl-1 py-2 pr-1">
+                    <p className="py-1">
+                        Succeeded: {progressVals.success}/{progressVals.max}
+                    </p>
+                    <progress
+                        className="progress progress-success w-100 h-4"
+                        value={progressVals.success}
+                        max={progressVals.max}
+                    ></progress>
+                    <p className="py-1">
+                        Failed: {progressVals.failed}/{progressVals.max}
+                    </p>
+                    <progress
+                        className="progress progress-error w-100 h-4"
+                        value={progressVals.failed}
+                        max={progressVals.max}
+                    ></progress>
+                </div>
             </div>
-            <motion.div variants={variants} initial="hidden" animate="visible">
+            <motion.div
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                className="all-responses border-2 border-indigo-500 rounded-md shadow-md"
+            >
                 {responses.map((response) => (
                     <motion.div variants={childVariants} key={response.uuid}>
                         <IndividualResponse
@@ -77,7 +124,7 @@ const ResponseCont = ({ responses, onDelete, retryApi, isClicked, setIsClicked }
                     </motion.div>
                 ))}
             </motion.div>
-        </div>
+        </>
     );
 };
 

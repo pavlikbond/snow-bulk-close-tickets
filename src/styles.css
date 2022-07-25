@@ -150,7 +150,7 @@ button:hover {
     background-color: #5d5df021;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px 0;
+    margin-bottom: 10px;
     box-shadow: rgba(112, 112, 116, 0.05) 0px 7px 7px 0px;
     position: relative;
     transition: all 0.3s ease;
@@ -167,6 +167,7 @@ button:hover {
 }
 .all-responses-container {
     height: auto;
+    overflow: hidden;
 }
 
 .close-btn {
@@ -195,6 +196,12 @@ button:hover {
     padding: 4px 4px 4px 0;
     border-radius: 5px;
     display: inline-block;
+}
+
+.all-responses {
+    overflow: auto;
+    height: fit-content;
+    max-height: 430px;
 }
 
 /* Medium screen devices (768px and above) */

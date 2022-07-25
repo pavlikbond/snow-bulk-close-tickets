@@ -9,6 +9,7 @@ import Radios from "./Radios";
 import { BiError } from "react-icons/bi";
 import LogoutButton from "./LogoutButton";
 import userEvent from "@testing-library/user-event";
+import { useAuth0 } from "@auth0/auth0-react";
 
 let fakeResponses = ["Ticket Close Sucessful", "Ticket Close Failed", "Ticket Not Found"];
 
@@ -25,7 +26,13 @@ function App() {
     const [closeNotes, setCloseNotes] = useState("");
     const [isClicked, setIsClicked] = useState(false);
 
-    let tempCurrentRespnse = {};
+    const { user, isAuthenticated } = useAuth0();
+    let userInfo = {};
+
+    if (isAuthenticated) {
+        userInfo.name = user.name;
+        userInfo.email = user.email;
+    }
 
     //read the input and update the state
     let formInputHandler = (e) => {
@@ -48,9 +55,10 @@ function App() {
     //cleans raw input and returns an array of ticket numbers
     function cleanRawInput(rawInput) {
         //clean the commas, newlines, and spaces and turn into an array of ticket numbers
+        rawInput = rawInput.replaceAll(",", "");
         let splitResult = rawInput.split(/[\n\s,]+/);
         const results = splitResult.map((element) => {
-            return element.trim().replace(",", "");
+            return element.trim().replaceAll(",", "");
         });
         return results;
     }
@@ -121,6 +129,7 @@ function App() {
                             ticketNum: ticketNum,
                             state: state,
                             closeNotes: closeNotes.trim(),
+                            user: userInfo,
                         }),
                     })
                         .then((response) => response.json()) //convert response
@@ -214,6 +223,7 @@ function App() {
                 <Radios changeRadios={changeRadios} />
                 <span className="directions">Enter ticket numbers separated by commas or spaces</span>
                 <textarea
+                    spellCheck="false"
                     onChange={formInputHandler}
                     className="incidents"
                     placeholder="INC1234567, INC1234567, INC1234567, INC1234567"
