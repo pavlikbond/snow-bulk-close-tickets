@@ -120,6 +120,7 @@ function App() {
                                     ticketNum: "number" in item.result ? item.result.number : ticketNum,
                                     snowResponse: item.result.info,
                                     errors: item.result.errors,
+                                    isError: false,
                                     timestamp: Date().toString().substring(0, 24),
                                     uuid: uuidv4(), //unique id used for deleting values
                                 };
@@ -138,6 +139,17 @@ function App() {
                         const isLastAttemp = i + 1 === retries;
                         if (isLastAttemp) {
                             console.log(error);
+
+                            let newResponse = {
+                                ticketNum: ticketNum,
+                                snowResponse: "",
+                                errors: [error.errorMessage],
+                                isError: true,
+                                timestamp: Date().toString().substring(0, 24),
+                                uuid: uuidv4(), //unique id used for deleting values
+                            };
+                            setCurrentResponse(newResponse);
+                            done = true;
                             setLoading(false);
                             setError(() => {
                                 return `Failed for ticket number: ${ticketNum}`;
@@ -158,6 +170,7 @@ function App() {
 
     return (
         <div className="main-container text-gray-600">
+            {/* <LogoutButton /> */}
             <motion.div className="form">
                 <h1>Close Tickets</h1>
                 <Radios changeRadios={changeRadios} />
@@ -187,7 +200,7 @@ function App() {
                     )}
                     {isLoading && (
                         <button className="loading-btn" disabled>
-                            <TailSpin color="#fff" height={40} width={40} />
+                            <TailSpin color="#fff" height={40} />
                         </button>
                     )}
                     {error && (
