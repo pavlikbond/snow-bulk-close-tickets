@@ -2,7 +2,7 @@ import React from "react";
 import IndividualResponse from "./individualResponse";
 import { motion } from "framer-motion";
 
-const ResponseCont = ({ responses, onDelete }) => {
+const ResponseCont = ({ responses, onDelete, retryApi, isClicked, setIsClicked }) => {
     //convert visible responses to a csv file and download it
     const downloadCSV = (responses) => {
         //turns the responses array of objects into a CSV string
@@ -67,7 +67,13 @@ const ResponseCont = ({ responses, onDelete }) => {
             <motion.div variants={variants} initial="hidden" animate="visible">
                 {responses.map((response) => (
                     <motion.div variants={childVariants} key={response.uuid}>
-                        <IndividualResponse response={response} onDelete={onDelete} />
+                        <IndividualResponse
+                            response={response}
+                            onDelete={onDelete}
+                            retryApi={retryApi}
+                            isClicked={isClicked}
+                            setIsClicked={setIsClicked}
+                        />
                     </motion.div>
                 ))}
             </motion.div>

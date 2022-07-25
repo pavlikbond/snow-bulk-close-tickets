@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import Radios from "./Radios";
 import { BiError } from "react-icons/bi";
 import LogoutButton from "./LogoutButton";
+import userEvent from "@testing-library/user-event";
 
 let fakeResponses = ["Ticket Close Sucessful", "Ticket Close Failed", "Ticket Not Found"];
 
@@ -22,6 +23,9 @@ function App() {
     const [error, setError] = useState("");
     const didMount = useRef(false);
     const [closeNotes, setCloseNotes] = useState("");
+    const [isClicked, setIsClicked] = useState(false);
+
+    let tempCurrentRespnse = {};
 
     //read the input and update the state
     let formInputHandler = (e) => {
@@ -93,74 +97,108 @@ function App() {
 
         //call lambda separately for each ticket number
         for (let ticketNum of results) {
-            let done = false;
-            let retries = 5;
-            for (let i = 0; i < retries; i++) {
-                if (!done) {
-                    try {
-                        await fetch("https://smconnect.ensono.com/bulkCloseTickets", {
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json",
-                                //"X-Api-Key": "CpZ3HkIXqX5oJ1F0ocdm86JcRlR9h5dO5wX9htGB",
-                            },
-                            body: JSON.stringify({
-                                environment: environment,
-                                version: version,
-                                ticketNum: ticketNum,
-                                state: state,
-                                closeNotes: closeNotes.trim(),
-                            }),
-                        })
-                            .then((response) => response.json()) //convert response
-                            .then((item) => {
-                                console.log(item);
+            await callApi(ticketNum);
+        }
+        setLoading(false);
+        //setResponses([...r]);
+    }
 
-                                let newResponse = {
-                                    ticketNum: "number" in item.result ? item.result.number : ticketNum,
-                                    snowResponse: item.result.info,
-                                    errors: item.result.errors,
-                                    isError: false,
-                                    timestamp: Date().toString().substring(0, 24),
-                                    uuid: uuidv4(), //unique id used for deleting values
-                                };
-                                setCurrentResponse(newResponse);
-                                done = true;
-                                setError(() => {
-                                    //clear out errors if there was one
-                                    return "";
-                                });
-                                //r.push(newResponse);
-                            });
-                    } catch (error) {
-                        setError(() => {
-                            return "Retrying...";
-                        });
-                        const isLastAttemp = i + 1 === retries;
-                        if (isLastAttemp) {
-                            console.log(error);
+    let callApi = async (ticketNum, retry = false, uuid = "") => {
+        let done = false;
+        let retries = 5;
+        for (let i = 0; i < retries; i++) {
+            if (!done) {
+                try {
+                    await fetch("https://smconnect.ensono.com/bulkCloseTickets", {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            //"X-Api-Key": "CpZ3HkIXqX5oJ1F0ocdm86JcRlR9h5dO5wX9htGB",
+                        },
+                        body: JSON.stringify({
+                            environment: environment,
+                            version: version,
+                            ticketNum: ticketNum,
+                            state: state,
+                            closeNotes: closeNotes.trim(),
+                        }),
+                    })
+                        .then((response) => response.json()) //convert response
+                        .then((item) => {
+                            console.log(item);
 
                             let newResponse = {
-                                ticketNum: ticketNum,
-                                snowResponse: "",
-                                errors: [error.errorMessage],
-                                isError: true,
+                                ticketNum: "number" in item.result ? item.result.number : ticketNum,
+                                snowResponse: item.result.info,
+                                errors: item.result.errors,
+                                isError: false,
                                 timestamp: Date().toString().substring(0, 24),
-                                uuid: uuidv4(), //unique id used for deleting values
+                                uuid: retry ? uuid : uuidv4(), //unique id used for deleting values
                             };
-                            setCurrentResponse(newResponse);
+                            if (retry) {
+                                runUpdate(newResponse, uuid);
+                            } else {
+                                setCurrentResponse(newResponse);
+                            }
+
                             done = true;
-                            setLoading(false);
                             setError(() => {
-                                return `Failed for ticket number: ${ticketNum}`;
+                                //clear out errors if there was one
+                                return "";
                             });
+                            //r.push(newResponse);
+                        });
+                } catch (error) {
+                    setError(() => {
+                        return "Retrying...";
+                    });
+                    const isLastAttemp = i + 1 === retries;
+                    if (isLastAttemp) {
+                        console.log(error);
+
+                        let newResponse = {
+                            ticketNum: ticketNum,
+                            snowResponse: "",
+                            errors: [error.errorMessage],
+                            isError: true,
+                            timestamp: Date().toString().substring(0, 24),
+                            uuid: retry ? uuid : uuidv4(), //unique id used for deleting values
+                        };
+                        if (retry) {
+                            runUpdate(newResponse, uuid);
+                        } else {
+                            setCurrentResponse(newResponse);
                         }
+                        done = true;
+                        setLoading(false);
+                        setError(() => {
+                            return `Failed for ticket number: ${ticketNum}`;
+                        });
+                        return false;
                     }
                 }
             }
         }
-        setLoading(false);
-        //setResponses([...r]);
+    };
+
+    let retryApi = async (uuid) => {
+        for (let i = 0; i < responses.length; i++) {
+            if (responses[i].uuid === uuid) {
+                callApi(responses[i].ticketNum, true, uuid);
+            }
+        }
+    };
+
+    function runUpdate(newResponse, uuid) {
+        let newResponses = responses.map((response) => {
+            if (response.uuid === uuid) {
+                return newResponse;
+            }
+            return response;
+        });
+        //console.log("New responses = " + newResponses);
+        setResponses(newResponses);
+        setIsClicked(false);
     }
 
     //deletes a response card when user clicks 'x'
@@ -219,7 +257,13 @@ function App() {
                     initial={{ opacity: 0.8, scale: 0.8 }} //initial states
                     animate={{ opacity: 1, scale: 1 }} // final states
                 >
-                    <ResponseCont responses={responses} onDelete={deleteResponse} />
+                    <ResponseCont
+                        responses={responses}
+                        onDelete={deleteResponse}
+                        retryApi={retryApi}
+                        isClicked={isClicked}
+                        setIsClicked={setIsClicked}
+                    />
                 </motion.div>
             )}
         </div>

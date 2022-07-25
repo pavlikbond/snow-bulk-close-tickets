@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { BsDot } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { TailSpin } from "react-loader-spinner";
 
-const IndividualResponse = ({ response, onDelete }) => {
+const IndividualResponse = ({ response, onDelete, retryApi, isClicked, setIsClicked }) => {
     function retryHandler() {
-        console.log("retry");
+        setIsClicked(true);
+        retryApi(response.uuid);
     }
     //className={check.includes("resolved") ? "resolved shadow" : "note"}
     let check = (note) => {
@@ -44,15 +45,23 @@ const IndividualResponse = ({ response, onDelete }) => {
                 })}
             </div>
             <FaTimes className="close-btn" onClick={() => onDelete(response.uuid)} />
-            {response.isError && <button className="btn btn-error btn-sm w-3">Retry</button>}
-            <div className="flex justify-end">
-                <button
-                    className=" btn btn-error btn-sm w-3 relative bottom-0 right-0 mr-0 normal-case p-0"
-                    onClick={retryHandler}
-                >
-                    <TailSpin color="#fff" height={20} width={20} /> <p className="ml-2">Processing</p>
-                </button>
-            </div>
+            {response.isError && (
+                <div className="flex justify-end">
+                    <button
+                        className=" btn btn-error btn-sm relative bottom-0 right-0 mr-0 normal-case p-0"
+                        onClick={retryHandler}
+                    >
+                        {!isClicked ? (
+                            <p className="text-center">Retry</p>
+                        ) : (
+                            <>
+                                <TailSpin color="#fff" height={20} width={20} />
+                                <p className="ml-2">Retrying...</p>
+                            </>
+                        )}
+                    </button>
+                </div>
+            )}
         </motion.div>
     );
 };
