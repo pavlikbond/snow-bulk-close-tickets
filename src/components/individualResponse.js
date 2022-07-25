@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { BsDot } from "react-icons/bs";
 import { motion } from "framer-motion";
+import { TailSpin } from "react-loader-spinner";
 
-const IndividualResponse = ({ response, onDelete }) => {
+const IndividualResponse = ({ response, onDelete, retryApi, isClicked, setIsClicked }) => {
+    function retryHandler() {
+        setIsClicked(true);
+        retryApi(response.uuid);
+    }
     //className={check.includes("resolved") ? "resolved shadow" : "note"}
     let check = (note) => {
         note = note.toLowerCase();
@@ -39,9 +44,24 @@ const IndividualResponse = ({ response, onDelete }) => {
                     );
                 })}
             </div>
-
-            {/* <span className="response-timestamp">{response.timestamp}</span> */}
             <FaTimes className="close-btn" onClick={() => onDelete(response.uuid)} />
+            {response.isError && (
+                <div className="flex justify-end">
+                    <button
+                        className=" btn btn-error btn-sm relative bottom-0 right-0 mr-0 normal-case p-0"
+                        onClick={retryHandler}
+                    >
+                        {!isClicked ? (
+                            <p className="text-center">Retry</p>
+                        ) : (
+                            <>
+                                <TailSpin color="#fff" height={20} width={20} />
+                                <p className="ml-2">Retrying...</p>
+                            </>
+                        )}
+                    </button>
+                </div>
+            )}
         </motion.div>
     );
 };

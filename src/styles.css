@@ -48,9 +48,12 @@ h1,
 
     overflow: auto;
 }
+.all-responses-container {
+    max-height: 685px;
+}
 
 .form {
-    max-height: fit-content;
+    max-height: fit-contet;
 }
 
 .form {
@@ -154,7 +157,7 @@ button:hover {
 }
 
 .response:hover {
-    transform: scale(1.01);
+    background-color: #5d5df02f;
 }
 
 .response .ticket-number {
