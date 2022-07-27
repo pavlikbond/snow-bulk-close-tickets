@@ -66,16 +66,20 @@ const ResponseCont = ({ responses, onDelete, retryApi, isClicked, setIsClicked }
         if (response.snowResponse === []) {
             continue;
         } else {
-            let note = response.snowResponse.join();
-            note = note.toLowerCase();
-            if (note.includes("cannot") || note.includes("unable")) {
-                progressVals.failed++;
-            } else if (
-                note.includes("resolved") ||
-                note.includes("was cancelled") ||
-                note.includes("has been cancelled")
-            ) {
-                progressVals.success++;
+            try {
+                let note = response.snowResponse.join();
+                note = note.toLowerCase();
+                if (note.includes("cannot") || note.includes("unable")) {
+                    progressVals.failed++;
+                } else if (
+                    note.includes("resolved") ||
+                    note.includes("was cancelled") ||
+                    note.includes("has been cancelled")
+                ) {
+                    progressVals.success++;
+                }
+            } catch (error) {
+                continue;
             }
         }
     }
@@ -106,12 +110,7 @@ const ResponseCont = ({ responses, onDelete, retryApi, isClicked, setIsClicked }
                     ></progress>
                 </div>
             </div>
-            <motion.div
-                variants={variants}
-                initial="hidden"
-                animate="visible"
-                className="all-responses border-2 border-indigo-500 rounded-md shadow-md"
-            >
+            <motion.div variants={variants} initial="hidden" animate="visible" className="all-responses  rounded-md">
                 {responses.map((response) => (
                     <motion.div variants={childVariants} key={response.uuid}>
                         <IndividualResponse

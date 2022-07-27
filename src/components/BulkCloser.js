@@ -135,15 +135,27 @@ function App() {
                         .then((response) => response.json()) //convert response
                         .then((item) => {
                             console.log(item);
-
-                            let newResponse = {
-                                ticketNum: "number" in item.result ? item.result.number : ticketNum,
-                                snowResponse: item.result.info,
-                                errors: item.result.errors,
-                                isError: false,
-                                timestamp: Date().toString().substring(0, 24),
-                                uuid: retry ? uuid : uuidv4(), //unique id used for deleting values
-                            };
+                            let newResponse = {};
+                            //if item is undefined, means there was some connection error
+                            if (!item) {
+                                newResponse = {
+                                    ticketNum: "",
+                                    snowResponse: [],
+                                    errors: ["Connection error, please retry"],
+                                    isError: true,
+                                    timestamp: Date().toString().substring(0, 24),
+                                    uuid: retry ? uuid : uuidv4(), //unique id used for deleting values
+                                };
+                            } else {
+                                newResponse = {
+                                    ticketNum: "number" in item.result ? item.result.number : ticketNum,
+                                    snowResponse: item.result.info,
+                                    errors: item.result.errors,
+                                    isError: false,
+                                    timestamp: Date().toString().substring(0, 24),
+                                    uuid: retry ? uuid : uuidv4(), //unique id used for deleting values
+                                };
+                            }
                             if (retry) {
                                 runUpdate(newResponse, uuid);
                             } else {
@@ -167,7 +179,7 @@ function App() {
 
                         let newResponse = {
                             ticketNum: ticketNum,
-                            snowResponse: "",
+                            snowResponse: [],
                             errors: [error.errorMessage],
                             isError: true,
                             timestamp: Date().toString().substring(0, 24),
@@ -217,7 +229,7 @@ function App() {
 
     return (
         <div className="main-container text-gray-600">
-            {/* <LogoutButton /> */}
+            <LogoutButton />
             <motion.div className="form">
                 <h1>Close Tickets</h1>
                 <Radios changeRadios={changeRadios} />
