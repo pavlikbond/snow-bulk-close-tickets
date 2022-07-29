@@ -8,13 +8,21 @@ import { v4 as uuidv4 } from "uuid";
 import Radios from "./Radios";
 import { BiError } from "react-icons/bi";
 import LogoutButton from "./LogoutButton";
-import userEvent from "@testing-library/user-event";
-import { useAuth0 } from "@auth0/auth0-react";
 import SubmitModal from "./SubmitModal";
+import { Auth } from "aws-amplify";
 
-let fakeResponses = ["Ticket Close Sucessful", "Ticket Close Failed", "Ticket Not Found"];
+function BulkCloser() {
+    let userInfo = {};
 
-function App() {
+    Auth.currentAuthenticatedUser({
+        bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+        .then((user) => {
+            userInfo.email = user.attributes.email;
+            userInfo.name = user.attributes.name ? user.attributes.name : user.attributes.email;
+        })
+        .catch((err) => console.log(err));
+
     let [environment, setEnvironment] = useState("Test");
     let [version, setVersion] = useState("V1");
     let [state, setState] = useState("resolve");
@@ -27,14 +35,6 @@ function App() {
     const [closeNotes, setCloseNotes] = useState("");
     const [isClicked, setIsClicked] = useState(false);
     const [modalState, setModalState] = useState("");
-
-    const { user, isAuthenticated } = useAuth0();
-    let userInfo = {};
-
-    if (isAuthenticated) {
-        userInfo.name = user.name;
-        userInfo.email = user.email;
-    }
 
     //read the input and update the state
     let formInputHandler = (e) => {
@@ -86,7 +86,7 @@ function App() {
     function prodChecker() {
         let rawInput = formInput.trim();
 
-        if (rawInput == "") {
+        if (rawInput === "") {
             setError(() => {
                 return "Input field cannot be blank";
             });
@@ -234,7 +234,7 @@ function App() {
 
     //deletes a response card when user clicks 'x'
     const deleteResponse = (uuid) => {
-        setResponses(responses.filter((response) => response.uuid != uuid));
+        setResponses(responses.filter((response) => response.uuid !== uuid));
     };
 
     return (
@@ -303,4 +303,4 @@ function App() {
     );
 }
 
-export default App;
+export default BulkCloser;
