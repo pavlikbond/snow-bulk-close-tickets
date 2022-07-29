@@ -10,6 +10,7 @@ import { BiError } from "react-icons/bi";
 import LogoutButton from "./LogoutButton";
 import userEvent from "@testing-library/user-event";
 import { useAuth0 } from "@auth0/auth0-react";
+import SubmitModal from "./SubmitModal";
 
 let fakeResponses = ["Ticket Close Sucessful", "Ticket Close Failed", "Ticket Not Found"];
 
@@ -25,6 +26,7 @@ function App() {
     const didMount = useRef(false);
     const [closeNotes, setCloseNotes] = useState("");
     const [isClicked, setIsClicked] = useState(false);
+    const [modalState, setModalState] = useState("");
 
     const { user, isAuthenticated } = useAuth0();
     let userInfo = {};
@@ -55,10 +57,10 @@ function App() {
     //cleans raw input and returns an array of ticket numbers
     function cleanRawInput(rawInput) {
         //clean the commas, newlines, and spaces and turn into an array of ticket numbers
-        rawInput = rawInput.replaceAll(",", "");
+        rawInput = rawInput.replaceAll(",", " ").trim();
         let splitResult = rawInput.split(/[\n\s,]+/);
         const results = splitResult.map((element) => {
-            return element.trim().replaceAll(",", "");
+            return element.trim();
         });
         return results;
     }
@@ -81,6 +83,23 @@ function App() {
         // }
     };
 
+    function prodChecker() {
+        let rawInput = formInput.trim();
+
+        if (rawInput == "") {
+            setError(() => {
+                return "Input field cannot be blank";
+            });
+            return; // if nothing was entered into the textarea do nothing
+        }
+
+        if (environment === "Prod") {
+            setModalState("modal-open");
+        } else {
+            handler();
+        }
+    }
+
     async function handler() {
         setLoading(true); //initiating loading circle animation
         setError(() => {
@@ -90,16 +109,7 @@ function App() {
         if (responses.length > 0) {
             responses.length = 0; //clear old responses if re-submitting new ones
         }
-
         let rawInput = formInput.trim();
-
-        if (rawInput == "") {
-            setLoading(false);
-            setError(() => {
-                return "Input field cannot be blank";
-            });
-            return; // if nothing was entered into the textarea do nothing
-        }
 
         let results = cleanRawInput(rawInput);
 
@@ -244,6 +254,7 @@ function App() {
                 ></textarea>
                 <Input setCloseNotes={setCloseNotes} closeNotes={closeNotes} />
                 <div className="button-container">
+                    <SubmitModal modalState={modalState} setModalState={setModalState} handler={handler} />
                     <button
                         className="clear-btn"
                         onClick={() => {
@@ -254,7 +265,7 @@ function App() {
                         Clear
                     </button>
                     {!isLoading && (
-                        <button className="submit-btn" onClick={handler}>
+                        <button className="submit-btn" onClick={prodChecker}>
                             Submit
                         </button>
                     )}

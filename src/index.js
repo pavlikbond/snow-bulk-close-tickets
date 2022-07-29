@@ -9,8 +9,8 @@ root.render(
     <Auth0Provider
         domain="dev-xxu-junt.us.auth0.com"
         clientId="nimb2Zw7ePBlDqeyvEBJWAKiCrwZum22"
-        redirectUri={`https://d1cdqg4dcaf7ug.cloudfront.net/bulk-close-app`}
-        // redirectUri={`http://localhost:3000/bulk-close-app`}
+        //redirectUri={`https://d1cdqg4dcaf7ug.cloudfront.net/bulk-close-app`}
+        redirectUri={`http://localhost:3000/bulk-close-app`}
     >
         <Router>
             <App />

@@ -69,9 +69,7 @@ const ResponseCont = ({ responses, onDelete, retryApi, isClicked, setIsClicked }
             try {
                 let note = response.snowResponse.join();
                 note = note.toLowerCase();
-                if (note.includes("cannot") || note.includes("unable")) {
-                    progressVals.failed++;
-                } else if (
+                if (
                     note.includes("resolved") ||
                     note.includes("was cancelled") ||
                     note.includes("has been cancelled")
