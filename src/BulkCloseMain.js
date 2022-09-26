@@ -95,11 +95,10 @@ function BulkCloseMain() {
             for (let i = 0; i < retries; i++) {
                 if (!done) {
                     try {
-                        await fetch("https://smconnect.ensono.com/bulkCloseTickets", {
+                        await fetch(`${process.env.API_ENDPOINT}`, {
                             method: "PUT",
                             headers: {
                                 "Content-Type": "application/json",
-                                //"X-Api-Key": "CpZ3HkIXqX5oJ1F0ocdm86JcRlR9h5dO5wX9htGB",
                             },
                             body: JSON.stringify({
                                 environment: environment,
