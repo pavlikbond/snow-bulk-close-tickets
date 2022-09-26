@@ -90,7 +90,10 @@ textarea::placeholder {
     color: rgb(183, 182, 182);
 }
 
-button {
+.clear-btn,
+.submit-btn,
+.loading-btn,
+.print-csv-btn {
     margin-top: 10px;
     border-radius: 10px;
     box-shadow: #5d5df08e 0 10px 20px -10px;
@@ -202,6 +205,21 @@ button:hover {
     overflow: auto;
     height: fit-content;
     max-height: 430px;
+}
+/* AWS Cognito Login styles*/
+
+.amplify-button[data-variation="primary"] {
+    background: #570df8;
+}
+.amplify-button[data-variation="primary"]:hover {
+    background: #510ce7;
+    transform: scale(1.01);
+}
+.authenticator {
+    padding-top: 20vh;
+}
+.authenticator div div {
+    border-radius: 10px;
 }
 
 /* Medium screen devices (768px and above) */

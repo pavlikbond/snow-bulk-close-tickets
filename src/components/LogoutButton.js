@@ -1,11 +1,17 @@
 import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Auth } from "aws-amplify";
 
 const LogoutButton = () => {
-    const { logout } = useAuth0();
+    let signOut = async () => {
+        try {
+            await Auth.signOut();
+        } catch (error) {
+            console.log("error signing out: ", error);
+        }
+    };
 
     return (
-        <button className="btn absolute top-0 left-2" onClick={() => logout({ returnTo: window.location.origin })}>
+        <button className="btn absolute top-2 left-2" onClick={signOut}>
             Log Out
         </button>
     );

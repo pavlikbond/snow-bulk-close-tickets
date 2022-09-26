@@ -33,10 +33,10 @@ const SubmitModal = ({ modalState, setModalState, handler }) => {
                     </p>
                     <div className="flex justify-end">
                         <label htmlFor="my-modal-1" className="btn btn-outline mr-3" onClick={removeModal}>
-                            Cancel
+                            Back
                         </label>
                         <label htmlFor="my-modal-1" className="btn btn-primary" onClick={submitBtnHandler}>
-                            Confirm
+                            Continue
                         </label>
                     </div>
                 </div>
