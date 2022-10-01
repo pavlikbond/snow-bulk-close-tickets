@@ -11,7 +11,6 @@ This application was built to be able to close multiple ServiceNow tickets in qu
 * An optional close note field
 * If the user selected the Production environment, a dialog box would appear where a user would have to type "Confirm" to proceed
 * If a user clicked "Submit" in the Production environment they would have to click again to confirm in a separate dialog box. This is done to ensure that production tickets don't get closed accidentially
-* 
 
 
-![Drag Racing]([Dragster.jpg](https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-doi-inthanon-national-park-thailand-36703721.jpg))
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
