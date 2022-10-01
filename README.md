@@ -13,4 +13,4 @@ This application was built to be able to close multiple ServiceNow tickets in qu
 * If a user clicked "Submit" in the Production environment they would have to click again to confirm in a separate dialog box. This is done to ensure that production tickets don't get closed accidentially
 
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif](https://github-media.s3.amazonaws.com/login.gif)
