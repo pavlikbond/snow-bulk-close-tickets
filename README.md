@@ -15,5 +15,5 @@ This application was built to be able to close multiple ServiceNow tickets in qu
 
 
 <img src="[image](https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-doi-inthanon-national-park-thailand-36703721.jpg)"
-     alt="Markdown Monster icon"
+     alt="image"
      style="width: 100px" />
