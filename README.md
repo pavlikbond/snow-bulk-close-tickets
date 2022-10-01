@@ -9,7 +9,7 @@ This application was built so that multiple ServiceNow tickets could be closed i
 
 <img src="https://github-media.s3.amazonaws.com/ezgif.com-gif-maker.gif" width="600" />
 
-#### Settings which allow the user to select the ServiceNow instance and version (our company had 2 separate production instances of ServiceNow)
+#### Settings which allow the user to select the ServiceNow instance and environment (our company had 2 separate production instances of ServiceNow)
 
 
 * The user could also select whether the ticket gets resolved or cancelled
