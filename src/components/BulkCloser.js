@@ -7,9 +7,9 @@ import { TailSpin } from "react-loader-spinner";
 import { v4 as uuidv4 } from "uuid";
 import Radios from "./Radios";
 import { BiError } from "react-icons/bi";
-import LogoutButton from "./LogoutButton";
 import SubmitModal from "./SubmitModal";
 import { Auth } from "aws-amplify";
+import { SideBar } from "./SideBar";
 
 function BulkCloser() {
     let userInfo = {};
@@ -127,11 +127,11 @@ function BulkCloser() {
         for (let i = 0; i < retries; i++) {
             if (!done) {
                 try {
-                    await fetch("https://smconnect.ensono.com/bulkCloseTickets", {
+                    await fetch(`${process.env.REACT_APP_API_ENDPOINT}/bulkCloseTickets`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
-                            //"X-Api-Key": "CpZ3HkIXqX5oJ1F0ocdm86JcRlR9h5dO5wX9htGB",
+                            "x-api-key": process.env.REACT_APP_API_KEY,
                         },
                         body: JSON.stringify({
                             environment: environment,
@@ -238,9 +238,8 @@ function BulkCloser() {
     };
 
     return (
-        <div className="main-container text-gray-600">
-            <LogoutButton />
-            <motion.div className="form">
+        <div className="main-container text-gray-600 flex-1">
+            <motion.div className="form h-max">
                 <h1>Close Tickets</h1>
                 <Radios changeRadios={changeRadios} />
                 <span className="directions">Enter ticket numbers separated by commas or spaces</span>
