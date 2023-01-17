@@ -239,23 +239,29 @@ function BulkCloser() {
 
     return (
         <div className="main-container text-gray-600 flex-1">
-            <motion.div className="form h-max">
+            <motion.div className="form h-[685px]">
                 <h1>Close Tickets</h1>
                 <Radios changeRadios={changeRadios} />
-                <span className="directions">Enter ticket numbers separated by commas or spaces</span>
-                <textarea
-                    spellCheck="false"
-                    onChange={formInputHandler}
-                    className="incidents"
-                    placeholder="INC1234567, INC1234567, INC1234567, INC1234567"
-                    value={formInput}
-                    onKeyPress={handleKeypress}
-                ></textarea>
+                <div className="mt-4">
+                    <label className="label">
+                        <span className="label-text font-semibold text-slate-700">
+                            Enter a list of incidents separated by commas or spaces
+                        </span>
+                    </label>
+                    <textarea
+                        spellCheck="false"
+                        className="textarea textarea-bordered textarea-primary w-full min-h-[18rem]"
+                        onChange={formInputHandler}
+                        placeholder="INC1234567, INC1234567, INC1234567, INC1234567"
+                        value={formInput}
+                        onKeyPress={handleKeypress}
+                    ></textarea>
+                </div>
                 <Input setCloseNotes={setCloseNotes} closeNotes={closeNotes} />
-                <div className="button-container">
+                <div className="flex gap-3">
                     <SubmitModal modalState={modalState} setModalState={setModalState} handler={handler} />
                     <button
-                        className="clear-btn"
+                        className="btn"
                         onClick={() => {
                             setFormInput(() => "");
                             setCloseNotes("");
@@ -264,17 +270,17 @@ function BulkCloser() {
                         Clear
                     </button>
                     {!isLoading && (
-                        <button className="submit-btn" onClick={prodChecker}>
+                        <button className="btn  btn-primary" onClick={prodChecker}>
                             Submit
                         </button>
                     )}
                     {isLoading && (
-                        <button className="loading-btn" disabled>
+                        <button className="btn" disabled>
                             <TailSpin color="#fff" height={40} />
                         </button>
                     )}
                     {error && (
-                        <div className="bg-red-300 text-red-700 rounded shadow mt-2.5 p-2 inline-block text-sm md:text-base">
+                        <div className="bg-red-300 text-red-700 rounded shadow p-2 inline-block text-sm md:text-base">
                             <BiError className="inline mr-1" />
                             {error}
                         </div>

@@ -1,6 +1,31 @@
 import React from "react";
 import IndividualResponse from "./individualResponse";
 import { motion } from "framer-motion";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+import Typography from "@mui/material/Typography";
+import PropTypes from "prop-types";
+
+function LinearProgressWithLabel(props) {
+    return (
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ width: "100%", mr: 1 }}>
+                <LinearProgress variant="determinate" {...props} />
+            </Box>
+            <Box sx={{ minWidth: 35 }}>
+                <Typography variant="body2" color="text.secondary">{`${Math.round(props.value)}%`}</Typography>
+            </Box>
+        </Box>
+    );
+}
+
+LinearProgressWithLabel.propTypes = {
+    /**
+     * The value of the progress indicator for the determinate and buffer variants.
+     * Value between 0 and 100.
+     */
+    value: PropTypes.number.isRequired,
+};
 
 const ResponseCont = ({ responses, onDelete, retryApi, isClicked, setIsClicked }) => {
     //convert visible responses to a csv file and download it
@@ -86,29 +111,48 @@ const ResponseCont = ({ responses, onDelete, retryApi, isClicked, setIsClicked }
         <>
             <h3 className="responses-header">Responses</h3>
             <div className="flex flex-col">
-                <button className="print-csv-btn" onClick={() => downloadCSV(responses)}>
-                    Download CSV
-                </button>
-                <div className="flex flex-col font-bold pl-1 py-2 pr-1">
-                    <p className="py-1">
-                        Succeeded: {progressVals.success}/{progressVals.max}
-                    </p>
-                    <progress
-                        className="progress progress-success w-100 h-4"
+                <div className="flex flex-col font-bold pl-1 py-2 pr-1 gap-2">
+                    <button className="print-csv-btn btn-secondary" onClick={() => downloadCSV(responses)}>
+                        Download CSV
+                    </button>
+                    <div className="border-[1px] rounded border-slate-200 p-2">
+                        <p className="py-1 text-slate-600">
+                            Succeeded: {progressVals.success}/{progressVals.max}
+                        </p>
+                        <Box sx={{ width: "100%" }}>
+                            <LinearProgressWithLabel
+                                color="success"
+                                variant="determinate"
+                                value={(progressVals.success / progressVals.max) * 100}
+                            />
+                        </Box>
+                        {/* <progress
+                        className="progress progress-success w-100 h-2"
                         value={progressVals.success}
                         max={progressVals.max}
-                    ></progress>
-                    <p className="py-1">
-                        Failed: {progressVals.failed}/{progressVals.max}
-                    </p>
-                    <progress
-                        className="progress progress-error w-100 h-4"
+                    ></progress> */}
+                    </div>
+                    <div className="border-[1px] rounded border-slate-200 p-2">
+                        <p className="py-1 text-slate-600">
+                            Failed: {progressVals.failed}/{progressVals.max}
+                        </p>
+                        {/* <progress
+                        className="progress progress-error w-100 h-2"
                         value={progressVals.failed}
                         max={progressVals.max}
-                    ></progress>
+                    ></progress> */}
+
+                        <Box sx={{ width: "100%" }}>
+                            <LinearProgressWithLabel
+                                color="error"
+                                variant="determinate"
+                                value={(progressVals.failed / progressVals.max) * 100}
+                            />
+                        </Box>
+                    </div>
                 </div>
             </div>
-            <motion.div variants={variants} initial="hidden" animate="visible" className="all-responses  rounded-md">
+            <motion.div variants={variants} initial="hidden" animate="visible" className="all-responses p-2">
                 {responses.map((response) => (
                     <motion.div variants={childVariants} key={response.uuid}>
                         <IndividualResponse

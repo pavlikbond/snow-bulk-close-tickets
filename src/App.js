@@ -33,8 +33,8 @@ function App() {
                     <SideBar />
                     <Routes>
                         <Route path="/" element={<Home />}></Route>
-                        <Route path="/bulkCloser" element={<BulkCloser />} />
-                        <Route path="/queueReader" element={<QueueReader />} />
+                        <Route path="/bulkCloser/" element={<BulkCloser />} />
+                        <Route path="/queueReader/" element={<QueueReader />} />
                     </Routes>
                 </div>
             </Authenticator>

@@ -22,7 +22,7 @@ const IndividualResponse = ({ response, onDelete, retryApi, isClicked, setIsClic
     };
 
     return (
-        <motion.div className="response">
+        <motion.div className="response queue-card w-full border-[1px] border-slate-200 shadow-md">
             <span className="ticket-number">{response.ticketNum}</span>
             <div className="response-message">
                 {response.snowResponse.map((note, index) => {

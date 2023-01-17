@@ -33,10 +33,10 @@ const Radios = ({ changeRadios }) => {
         <div className="radios-container flex justify-between">
             <Modal setEnvironment={setEnvironment} modalState={modalState} setModalState={setModalState} />
             <div className="options-container">
+                <div className="py-1 font-bold">
+                    <p>Environment</p>
+                </div>
                 <div className="btn-group inline-block">
-                    <div className="py-1 font-bold">
-                        <p>Environment</p>
-                    </div>
                     <input
                         onChange={handleEnvironment}
                         value="Test"
@@ -60,10 +60,10 @@ const Radios = ({ changeRadios }) => {
             </div>
 
             <div className="options-container">
+                <div className="py-1 font-bold">
+                    <p className="">Version</p>
+                </div>
                 <div className="btn-group inline-block">
-                    <div className="py-1 font-bold">
-                        <p className="">Version</p>
-                    </div>
                     <input
                         onChange={handleVersion}
                         value="V1"
@@ -86,10 +86,10 @@ const Radios = ({ changeRadios }) => {
             </div>
 
             <div className="options-container">
+                <div className="py-1 font-bold">
+                    <p>State</p>
+                </div>
                 <div className="btn-group inline-block">
-                    <div className="py-1 font-bold">
-                        <p>State</p>
-                    </div>
                     <input
                         onChange={handleState}
                         value="resolve"
