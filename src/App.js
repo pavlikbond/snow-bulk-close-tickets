@@ -8,6 +8,7 @@ import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import SideBar from "./components/SideBar";
 import QueueReader from "./components/QueueReader";
+import Home from "./components/Home";
 
 Amplify.configure(awsconfig);
 
@@ -31,6 +32,7 @@ function App() {
                 <div className="flex">
                     <SideBar />
                     <Routes>
+                        <Route path="/" element={<Home />}></Route>
                         <Route path="/bulkCloser" element={<BulkCloser />} />
                         <Route path="/queueReader" element={<QueueReader />} />
                     </Routes>

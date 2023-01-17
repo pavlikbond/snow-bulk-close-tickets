@@ -2,12 +2,14 @@ import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { HiQueueList } from "react-icons/hi2";
 import { FiLogOut } from "react-icons/fi";
+import { AiOutlineHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
 const SideBar = () => {
     return (
         <div className="relative top-0 left-0 h-screen min-w-[64px]  w-16 m-0 flex flex-col bg-gray-900 text-white shadow-md justify-between">
             <div className="mt-5">
+                <SideBarIcon icon={<AiOutlineHome size="28" />} text="Home" route="/" />
                 <SideBarIcon icon={<FaRegTrashAlt size="28" />} text="Bulk Closer" route="/bulkCloser" />
                 <SideBarIcon icon={<HiQueueList size="28" />} text="Queue Reader" route="/queueReader" />
             </div>

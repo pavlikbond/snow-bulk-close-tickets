@@ -14,6 +14,24 @@ import { BsFillStopFill, BsFillPlayFill } from "react-icons/bs";
 
 const QueueReader = () => {
     const [queueReaderCards, setQueueReaderCards] = useState([0]);
+    const [companyDataList, setCompanyDataList] = useState([]);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_API_ENDPOINT}/queues`, {
+            headers: {
+                "x-api-key": process.env.REACT_APP_API_KEY,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setCompanyDataList(data);
+            })
+            .catch((err) => {
+                console.log(err);
+                setError("Error connecting to API");
+            });
+    }, []);
 
     function addCard() {
         if (queueReaderCards.length === 4) {
@@ -31,25 +49,32 @@ const QueueReader = () => {
     }
     return (
         <div className="flex flex-col gap-8 m-6">
-            <Button variant="contained" sx={{ width: "175px" }} onClick={() => addCard()}>
+            <button className="btn btn-info w-36 text-slate-700" onClick={() => addCard()}>
                 Add
-            </Button>
+            </button>
             <div className="flex flex-wrap gap-12">
                 {queueReaderCards.map((id) => {
-                    return <QueueReaderCard key={id} id={id} deleteQueueCard={deleteQueueCard} />;
+                    return (
+                        <QueueReaderCard
+                            key={id}
+                            id={id}
+                            deleteQueueCard={deleteQueueCard}
+                            companyDataList={companyDataList}
+                            error={error}
+                            setError={setError}
+                        />
+                    );
                 })}
             </div>
         </div>
     );
 };
 
-const QueueReaderCard = ({ id, deleteQueueCard }) => {
-    const [companyDataList, setCompanyDataList] = useState([]);
+const QueueReaderCard = ({ id, deleteQueueCard, companyDataList, error, setError }) => {
     const [company, setCompany] = useState({});
     const [inQueue, setInQueue] = useState(0);
     const inQueueRef = useRef(0);
     const [inFlight, setInFlight] = useState(0);
-    const [error, setError] = useState("");
     const [alignment, setAlignment] = useState("Dev");
     const [readQueue, setReadQueue] = useState(false);
     const [interval, updateInterval] = useState(0);
@@ -85,22 +110,6 @@ const QueueReaderCard = ({ id, deleteQueueCard }) => {
             };
         }
     }, [readQueue]);
-
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_ENDPOINT}/queues`, {
-            headers: {
-                "x-api-key": process.env.REACT_APP_API_KEY,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setCompanyDataList(data);
-            })
-            .catch((err) => {
-                console.log(err);
-                setError("Error connecting to API");
-            });
-    }, []);
 
     useEffect(() => {
         stopInterval();
@@ -166,7 +175,7 @@ const QueueReaderCard = ({ id, deleteQueueCard }) => {
         <div className=" bg-white shadow-lg  rounded-xl h-fit p-8 flex flex-col gap-5 relative">
             {id !== 0 && (
                 <AiFillCloseCircle
-                    className="absolute right-2 top-2 hover:scale-110 transition-all cursor-pointer"
+                    className="absolute right-2 top-2 hover:scale-110 transition-all cursor-pointer text-slate-600"
                     size={36}
                     onClick={() => deleteQueueCard(id)}
                 ></AiFillCloseCircle>
@@ -210,10 +219,8 @@ const QueueReaderCard = ({ id, deleteQueueCard }) => {
                 </div>
             </div>
             <div className="flex gap-3">
-                <Button
-                    variant="contained"
-                    size="large"
-                    sx={{ fontWeight: "bold", letterSpacing: "1.5px" }}
+                <button
+                    className="btn btn-info shadow-md text-slate-600"
                     onClick={() => {
                         setReadQueue(true);
                         if (!inCountDown) {
@@ -222,14 +229,12 @@ const QueueReaderCard = ({ id, deleteQueueCard }) => {
                     }}
                     disabled={readQueue}
                 >
-                    {readQueue && <TailSpin color="#570df8" height={20} width={30} />}
+                    {readQueue && <TailSpin color="rgb(71 85 105)" height={20} width={30} />}
                     {!readQueue && <BsFillPlayFill size={20} className="mr-2" />}
                     {readQueue ? "Reading" : "Start"}
-                </Button>
-                <Button
-                    variant="contained"
-                    size="large"
-                    sx={{ fontWeight: "bold", letterSpacing: "1.5px", backgroundColor: "rgb(239 68 68)" }}
+                </button>
+                <button
+                    className="btn btn-error text-slate-600"
                     onClick={() => {
                         setReadQueue(false);
                         stopInterval();
@@ -242,14 +247,10 @@ const QueueReaderCard = ({ id, deleteQueueCard }) => {
                 >
                     <BsFillStopFill size={20} className="mr-2" />
                     Stop
-                </Button>
+                </button>
             </div>
 
-            {error && (
-                <div className="bg-red-300 text-red-700 p-2 rounded-md border-red-600 border-2 text-lg font-semibold">
-                    {error}
-                </div>
-            )}
+            {error && <div className="bg-red-400 text-white px-2 py-1 rounded-md text-lg">{error}</div>}
         </div>
     );
 };
