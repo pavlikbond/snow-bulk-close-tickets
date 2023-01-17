@@ -1,13 +1,14 @@
-// import Profile from "./components/Profile";
 import "./index.css";
 import "./styles.css";
-// import { Routes, Route } from "react-router-dom";
-// import Home from "./components/Home";
+import { Routes, Route } from "react-router-dom";
 import BulkCloser from "./components/BulkCloser";
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
+import SideBar from "./components/SideBar";
+import QueueReader from "./components/QueueReader";
+import Home from "./components/Home";
 
 Amplify.configure(awsconfig);
 
@@ -28,7 +29,14 @@ function App() {
     return (
         <>
             <Authenticator hideSignUp={true} formFields={formFields} className="authenticator rounded-md">
-                <BulkCloser />
+                <div className="flex">
+                    <SideBar />
+                    <Routes>
+                        <Route path="/" element={<Home />}></Route>
+                        <Route path="/bulkCloser" element={<BulkCloser />} />
+                        <Route path="/queueReader" element={<QueueReader />} />
+                    </Routes>
+                </div>
             </Authenticator>
             {/* <Routes>
                 <Route path="/" element={<Home />} />
