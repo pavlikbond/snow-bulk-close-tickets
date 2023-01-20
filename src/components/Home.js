@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
+import { FaRegTrashAlt, FaMapSigns } from "react-icons/fa";
+import { HiQueueList } from "react-icons/hi2";
 const Home = () => {
     const [fact, setFact] = useState("");
 
@@ -29,11 +31,24 @@ const Home = () => {
             </Card>
             <div className="flex justify-center gap-3">
                 <Link to="/bulkCloser">
-                    <button className="btn btn-primary">Ticket Closer</button>
+                    <button className="btn btn-primary">
+                        <FaRegTrashAlt size="28" className="mr-3" />
+                        Ticket Closer
+                    </button>
                 </Link>
                 <Link to="queueReader">
-                    {" "}
-                    <button className="btn btn-primary">Queue Reader</button>
+                    <button className="btn btn-primary">
+                        {" "}
+                        <HiQueueList size="28" className="mr-3" />
+                        Queue Reader
+                    </button>
+                </Link>
+                <Link to="groupMapping">
+                    <button className="btn btn-primary">
+                        {" "}
+                        <FaMapSigns size="28" className="mr-3" />
+                        Group Mapping
+                    </button>
                 </Link>
             </div>
         </div>

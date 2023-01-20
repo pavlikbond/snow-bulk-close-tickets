@@ -9,10 +9,28 @@ import "@aws-amplify/ui-react/styles.css";
 import SideBar from "./components/SideBar";
 import QueueReader from "./components/QueueReader";
 import Home from "./components/Home";
-
+import GroupMappings from "./components/GroupMappings";
+import { useEffect, useState } from "react";
 Amplify.configure(awsconfig);
 
 function App() {
+    const [companyData, setCompanyData] = useState({});
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_API_ENDPOINT}/mappings?companies=true`, {
+            headers: {
+                "x-api-key": process.env.REACT_APP_API_KEY,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setCompanyData(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     const formFields = {
         signIn: {
             username: {
@@ -26,6 +44,7 @@ function App() {
             },
         },
     };
+
     return (
         <>
             <Authenticator hideSignUp={true} formFields={formFields} className="authenticator rounded-md">
@@ -35,6 +54,7 @@ function App() {
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/bulkCloser/" element={<BulkCloser />} />
                         <Route path="/queueReader/" element={<QueueReader />} />
+                        <Route path="/groupMapping/" element={<GroupMappings data={companyData} />} />
                     </Routes>
                 </div>
             </Authenticator>

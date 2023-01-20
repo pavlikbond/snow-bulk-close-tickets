@@ -48,7 +48,7 @@ const QueueReader = () => {
         setQueueReaderCards(cards);
     }
     return (
-        <div className="flex flex-col gap-8 m-6">
+        <div className="flex flex-col gap-8 m-6 ml-[128px]">
             <button className="btn btn-info w-36 text-slate-700" onClick={() => addCard()}>
                 Add
             </button>
@@ -172,7 +172,7 @@ const QueueReaderCard = ({ id, deleteQueueCard, companyDataList, error, setError
     };
 
     return (
-        <div className=" bg-white shadow-lg  rounded-xl h-fit p-8 flex flex-col gap-5 relative">
+        <div className=" bg-white shadow-lg rounded-xl h-fit p-8 flex flex-col gap-5 relative">
             {id !== 0 && (
                 <AiFillCloseCircle
                     className="absolute right-2 top-2 hover:scale-110 transition-all cursor-pointer text-slate-600"
