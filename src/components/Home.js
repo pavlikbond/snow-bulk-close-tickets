@@ -4,11 +4,13 @@ import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
 import { FaRegTrashAlt, FaMapSigns } from "react-icons/fa";
 import { HiQueueList } from "react-icons/hi2";
+import Skeleton from "@mui/material/Skeleton";
+
 const Home = () => {
     const [fact, setFact] = useState("");
 
     useEffect(() => {
-        fetch("https://uselessfacts.jsph.pl/random.json?language=en")
+        fetch("https://uselessfacts.jsph.pl/api/v2/facts/random?language=en")
             .then((result) => result.json())
             .then((result) => {
                 setFact(result.text);
@@ -25,7 +27,11 @@ const Home = () => {
                 <CardContent>
                     <div className="container">
                         <h2 className="font-bold text-2xl my-2">Random Fact</h2>
-                        <p className="font-semibold">{fact}</p>
+                        {fact ? (
+                            <p className="font-semibold">{fact}</p>
+                        ) : (
+                            <Skeleton variant="rounded" width={350} height={50} />
+                        )}
                     </div>
                 </CardContent>
             </Card>

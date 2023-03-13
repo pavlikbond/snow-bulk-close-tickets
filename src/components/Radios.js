@@ -1,26 +1,18 @@
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
-import { Auth } from "aws-amplify";
+import { useUserRole } from "./UserContext";
 
 const Radios = ({ changeRadios }) => {
     const [environment, setEnvironment] = useState("Test");
     const [version, setVersion] = useState("V1");
     const [state, setState] = useState("resolve");
     const [modalState, setModalState] = useState("");
-    //const [userEmail, setUserEmail] = useState("");
-    //const allowedEmails = ["pavel.bondarenko@ensono.com", "joshua.jenkins@Ensono.com", "jessie.fu@Ensono.com"];
     const [allowProd, setAllowProd] = useState(false);
-    //const allowedEmails = [];
+    const role = useUserRole();
+
     useEffect(() => {
-        Auth.currentUserInfo()
-            .then((result) => {
-                let role = result.attributes.profile;
-                //let email = result.attributes.email;
-                //console.log("user:", result.attributes.profile);
-                setAllowProd(role === "developer");
-            })
-            .catch((err) => {});
-    }, []);
+        setAllowProd(role === "developer");
+    }, [role]);
 
     let handleEnvironment = (e) => {
         setEnvironment(e.target.value);
@@ -45,8 +37,9 @@ const Radios = ({ changeRadios }) => {
     }
 
     return (
-        <div className="radios-container flex justify-between">
+        <div className={`radios-container flex justify-between`}>
             <Modal setEnvironment={setEnvironment} modalState={modalState} setModalState={setModalState} />
+
             <div className="options-container">
                 <div className="py-1 font-bold">
                     <p>Environment</p>
@@ -61,17 +54,19 @@ const Radios = ({ changeRadios }) => {
                         className="btn text-xs px-3 md:px-1 lg:text-sm lg:px-3"
                         checked={environment === "Test"}
                     />
-                    <input
-                        value="Prod"
-                        onChange={handleEnvironment}
-                        onClick={openModal}
-                        type="radio"
-                        name="environment"
-                        data-title="Prod"
-                        className="btn text-xs px-3 md:px-1 lg:text-sm lg:px-3"
-                        checked={environment === "Prod"}
-                        disabled={!allowProd}
-                    />
+                    {allowProd && (
+                        <input
+                            value="Prod"
+                            onChange={handleEnvironment}
+                            onClick={openModal}
+                            type="radio"
+                            name="environment"
+                            data-title="Prod"
+                            className="btn text-xs px-3 md:px-1 lg:text-sm lg:px-3"
+                            checked={environment === "Prod"}
+                            disabled={!allowProd}
+                        />
+                    )}
                 </div>
             </div>
 

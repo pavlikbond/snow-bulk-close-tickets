@@ -12,15 +12,17 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CircularProgress from "@mui/material/CircularProgress";
 import Skeleton from "@mui/material/Skeleton";
+import Button from "@mui/material/Button";
 
 const GroupMappings = ({ data }) => {
-    const notInitialRender = useRef(false);
     const [loading, setLoading] = useState(true);
     const [companyData, setCompanyData] = useState({});
     const [company, setCompany] = useState([]);
     const [tabValue, setTabValue] = useState(0);
     const [value, setValue] = useState(options()[0]);
     const [inputValue, setInputValue] = useState("");
+    const csvData = useRef([]);
+
     const handleChange = (event, newValue) => {
         setTabValue(newValue);
     };
@@ -28,7 +30,7 @@ const GroupMappings = ({ data }) => {
     useEffect(() => {
         if (Object.keys(data).length) {
             setCompanyData(data);
-            let firstCompany = Object.keys(data).sort()[0];
+            let firstCompany = Object.keys(data).sort().at(0);
             setCompany(data[firstCompany]);
             setValue(firstCompany);
             setInputValue(firstCompany);
@@ -36,33 +38,79 @@ const GroupMappings = ({ data }) => {
         }
     }, [data]);
 
+    const downloadCSV = (responses) => {
+        //turns the responses array of objects into a CSV string
+        if (csvData.current.length === 1) {
+            if (csvData.current[0].name === "Placeholder") {
+                csvData.current[0].name = inputValue;
+            }
+        }
+
+        for (let doc of csvData.current) {
+            createCSV(doc.groups, doc.name);
+        }
+
+        function createCSV(groupMapping, name) {
+            const csvString = [
+                ["Ensono Group", "Client Group"], //headers
+                ...groupMapping.map((group) => [group.ensonoVal || "Default", group.clientVal || "Default"]),
+            ]
+                .map((e) => e.join(","))
+                .join("\n");
+
+            //add data type to beginning of string
+            let csvContent = "data:text/csv;charset=utf-8," + csvString;
+            //generate an invisible a tag
+            let encodedUri = encodeURI(csvContent);
+            let link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `${name}_${company[tabValue].environment.toUpperCase()}_mapping.csv`); //put any name you want
+            document.body.appendChild(link); // Required for FF
+
+            link.click();
+        }
+    };
+
     function options() {
         return Object.keys(companyData).sort();
     }
 
-    function printStuff() {
-        console.log(company);
-        console.log(value);
+    function isV2(scan) {
+        return scan.version === "V2";
+    }
+
+    function displayImpactUrgency(company) {
+        return !company.mapping.simpleInboundPriority;
     }
 
     return (
         <div className="mx-auto mt-8 flex flex-col items-center gap-4">
-            <Autocomplete
-                value={value || null}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
-                    setCompany(companyData[newValue] || []);
-                    setTabValue(0);
-                }}
-                inputValue={inputValue}
-                onInputChange={(event, newInputValue) => {
-                    setInputValue(newInputValue);
-                }}
-                id="controllable-states-demo"
-                options={options()}
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Company" />}
-            />
+            <div className="flex gap-4">
+                <Autocomplete
+                    value={value || null}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                        setCompany(companyData[newValue] || []);
+                        setTabValue(0);
+                    }}
+                    inputValue={inputValue}
+                    onInputChange={(event, newInputValue) => {
+                        setInputValue(newInputValue);
+                    }}
+                    id="controllable-states-demo"
+                    options={options()}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => <TextField {...params} label="Company" />}
+                />
+                <Button
+                    className="min-w-32 w-fit"
+                    variant="contained"
+                    disabled={value ? false : true}
+                    onClick={downloadCSV}
+                >
+                    Download CSV
+                </Button>
+            </div>
             {loading && (
                 <>
                     <Box sx={{ display: "flex" }}>
@@ -97,14 +145,21 @@ const GroupMappings = ({ data }) => {
                         company.map((mapping, index) => {
                             return (
                                 <TabPanel value={tabValue} index={index} key={index}>
-                                    <div className="rounded shadow my-2 p-3 bg-slate-100">
+                                    <div className="mb-2 p-3">
                                         <div className="text-xl">
-                                            <span className="font-bold">Table Name:</span> {mapping.tableName}
+                                            <span className="font-semibold">Mapping table:</span> {mapping.tableName}
                                         </div>
                                     </div>
-                                    {mapping.mappings.length === 1 && <Table tableData={mapping.mappings[0]}></Table>}
+                                    {mapping.mappings.length === 1 && (
+                                        <div className="flex justify-center gap-10">
+                                            <Table data={mapping.mappings[0].mapping.groups} csvData={csvData}></Table>
+                                            {isV2(mapping) && displayImpactUrgency(mapping.mappings[0]) && (
+                                                <ImpactUrgency data={mapping.mappings[0].mapping}></ImpactUrgency>
+                                            )}
+                                        </div>
+                                    )}
                                     {mapping.mappings.length > 1 && (
-                                        <SimpleAccordion companyMappings={mapping.mappings}></SimpleAccordion>
+                                        <SimpleAccordion csvData={csvData} allMapping={mapping}></SimpleAccordion>
                                     )}
                                 </TabPanel>
                             );
@@ -115,24 +170,32 @@ const GroupMappings = ({ data }) => {
     );
 };
 
-const Table = ({ tableData }) => {
+const Table = ({ data, csvData, title = "Groups", numbered = true, multi = false }) => {
+    try {
+        if (!multi) {
+            csvData.current = [{ groups: data, name: "Placeholder" }];
+        }
+    } catch (error) {
+        console.log(error);
+    }
     return (
         <div className="overflow-x-auto">
+            <h2 className="text-center text-2xl py-2 text-white font-semibold bg-slate-600">{title}</h2>
             <table className="table table-compact w-full">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>Client Value</th>
-                        <th>Ensono Value</th>
+                        {numbered && <th></th>}
+                        <th className="pl-5">Ensono Value</th>
+                        <th className="pr-5">Client Value</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {tableData.mapping.groups.map((mapping, index) => {
+                    {data.map((mapping, index) => {
                         return (
                             <tr key={index} className="hover">
-                                <td>{index + 1}</td>
-                                <td>{mapping.clientVal ?? "Default"}</td>
-                                <td>{mapping.ensonoVal ?? "Default"}</td>
+                                {numbered && <td className="text-slate-700">{index + 1}</td>}
+                                <td className="text-slate-700 font-semibold pl-5">{mapping.ensonoVal ?? "Default"}</td>
+                                <td className="text-slate-700 font-semibold">{mapping.clientVal ?? "Default"}</td>
                             </tr>
                         );
                     })}
@@ -141,6 +204,15 @@ const Table = ({ tableData }) => {
         </div>
     );
 };
+
+function ImpactUrgency({ data }) {
+    return (
+        <div className="flex flex-col gap-4">
+            <Table data={data.impact} title={"Impact"} numbered={false}></Table>
+            <Table data={data.urgency} title={"Urgency"} numbered={false}></Table>
+        </div>
+    );
+}
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -175,12 +247,25 @@ function a11yProps(index) {
     };
 }
 
-function SimpleAccordion({ companyMappings }) {
-    //console.log(companyMappings);
-    companyMappings = companyMappings.sort((a, b) => {
+function SimpleAccordion({ allMapping, csvData }) {
+    function isV2(scan) {
+        return allMapping.version === "V2";
+    }
+
+    function displayImpactUrgency(company) {
+        return !company.mapping.simpleInboundPriority;
+    }
+    let companyMappings = allMapping.mappings.sort((a, b) => {
         if (a.Company > b.Company) return 1;
         return -1;
     });
+
+    let csvRes = companyMappings.map((mapping) => {
+        return { groups: mapping.mapping.groups, name: mapping.Company };
+    });
+
+    csvData.current = csvRes;
+
     return (
         <div>
             {companyMappings.map((mapping, index) => {
@@ -194,7 +279,12 @@ function SimpleAccordion({ companyMappings }) {
                             <Typography>{mapping.Company}</Typography>
                         </AccordionSummary>
                         <AccordionDetails className="bg-slate-100">
-                            <Table tableData={mapping}></Table>
+                            <div className="flex gap-10 justify-center">
+                                <Table data={mapping.mapping.groups} csvData={csvData} multi={true}></Table>
+                                {isV2(mapping) && displayImpactUrgency(mapping) && (
+                                    <ImpactUrgency data={mapping.mapping}></ImpactUrgency>
+                                )}
+                            </div>
                         </AccordionDetails>
                     </Accordion>
                 );

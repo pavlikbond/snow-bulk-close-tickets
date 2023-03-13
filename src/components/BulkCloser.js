@@ -245,14 +245,17 @@ function BulkCloser() {
                 <div className="mt-4">
                     <label className="label">
                         <span className="label-text font-semibold text-slate-700">
-                            Enter a list of incidents separated by commas or spaces
+                            Enter a list of tickets separated by commas, spaces, or new lines
                         </span>
                     </label>
                     <textarea
                         spellCheck="false"
                         className="textarea textarea-bordered textarea-primary w-full min-h-[18rem]"
                         onChange={formInputHandler}
-                        placeholder="INC1234567, INC1234567, INC1234567, INC1234567"
+                        placeholder=" INC1234567
+                        INC1234567
+                        INC1234567
+                        INC1234567"
                         value={formInput}
                         onKeyPress={handleKeypress}
                     ></textarea>

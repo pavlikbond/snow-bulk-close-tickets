@@ -12,26 +12,15 @@ import Button from "@mui/material/Button";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BsFillStopFill, BsFillPlayFill } from "react-icons/bs";
 
-const QueueReader = () => {
+const QueueReader = ({ data }) => {
     const [queueReaderCards, setQueueReaderCards] = useState([0]);
     const [companyDataList, setCompanyDataList] = useState([]);
-    const [error, setError] = useState("");
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_ENDPOINT}/queues`, {
-            headers: {
-                "x-api-key": process.env.REACT_APP_API_KEY,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setCompanyDataList(data);
-            })
-            .catch((err) => {
-                console.log(err);
-                setError("Error connecting to API");
-            });
-    }, []);
+        if (data.length) {
+            setCompanyDataList(data);
+        }
+    }, [data]);
 
     function addCard() {
         if (queueReaderCards.length === 4) {
@@ -60,8 +49,6 @@ const QueueReader = () => {
                             id={id}
                             deleteQueueCard={deleteQueueCard}
                             companyDataList={companyDataList}
-                            error={error}
-                            setError={setError}
                         />
                     );
                 })}
@@ -70,7 +57,7 @@ const QueueReader = () => {
     );
 };
 
-const QueueReaderCard = ({ id, deleteQueueCard, companyDataList, error, setError }) => {
+const QueueReaderCard = ({ id, deleteQueueCard, companyDataList }) => {
     const [company, setCompany] = useState({});
     const [inQueue, setInQueue] = useState(0);
     const inQueueRef = useRef(0);
@@ -83,6 +70,8 @@ const QueueReaderCard = ({ id, deleteQueueCard, companyDataList, error, setError
     const [lastQueueRead, setLastQueueRead] = useState(Date.now());
     const [inCountDown, setInCountDown] = useState(false);
     const [companyError, setCompanyError] = useState(false);
+    const [error, setError] = useState("");
+    const startTime = useRef(0);
 
     let stopInterval = () => {
         if (interval) {
@@ -96,13 +85,24 @@ const QueueReaderCard = ({ id, deleteQueueCard, companyDataList, error, setError
         }
     }
 
+    function checkStop() {
+        let now = Date.now();
+        let minSinceStart = (now - startTime.current) / 1000;
+        //stop reading queue after 30 minutes in case someone forgot
+        if (minSinceStart > 30 * 60) {
+            setReadQueue(false);
+        }
+    }
+
     useEffect(() => {
         setTimeLeft(timeLeftInterval);
         if (readQueue) {
+            startTime.current = Date.now();
             let interval = setInterval(() => {
                 setTimeLeft((timeLeft) => {
                     return timeLeft > 0 ? timeLeft - 1 : timeLeftInterval;
                 });
+                checkStop();
             }, 1000);
 
             return () => {
