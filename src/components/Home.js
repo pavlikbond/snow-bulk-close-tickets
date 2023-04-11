@@ -3,7 +3,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
 import { FaRegTrashAlt, FaMapSigns } from "react-icons/fa";
-import { HiQueueList } from "react-icons/hi2";
+import { HiQueueList, HiTicket } from "react-icons/hi2";
+import { BiCodeCurly } from "react-icons/bi";
 import Skeleton from "@mui/material/Skeleton";
 
 const Home = () => {
@@ -54,6 +55,20 @@ const Home = () => {
                         {" "}
                         <FaMapSigns size="28" className="mr-3" />
                         Group Mapping
+                    </button>
+                </Link>
+                <Link to="ticketGenerator">
+                    <button className="btn btn-primary">
+                        {" "}
+                        <HiTicket size="28" className="mr-3" />
+                        Ticket Generator
+                    </button>
+                </Link>
+                <Link to="mappingGenerator">
+                    <button className="btn btn-primary">
+                        {" "}
+                        <BiCodeCurly size="28" className="mr-3" />
+                        Mapping Object
                     </button>
                 </Link>
             </div>

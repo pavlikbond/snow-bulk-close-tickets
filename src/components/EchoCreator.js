@@ -39,7 +39,7 @@ const EchoCreator = ({ data }) => {
     const [responseData, setResponseData] = useState([]);
 
     const onChangeQuantity = (event) => {
-        if (event.target.value <= 10 && event.target.value >= 1) {
+        if (event.target.value <= 50 && event.target.value >= 1) {
             setQuantity(event.target.value);
         }
     };
@@ -158,10 +158,10 @@ const EchoCreator = ({ data }) => {
             ticketPayload: {
                 clientName: company.companyName,
                 ticketType: ticketType,
-                short_description: shortDescription,
-                shortDescription: shortDescription,
-                description: description,
-                priority: "3",
+                short_description: "test short desc", //shortDescription,
+                shortDescription: "test short desc", // shortDescription,
+                description: "test long desc", //description,
+                priority: "1",
                 group: "client.servicedesk",
                 clientTicketNumber: Date.now(),
             },
@@ -193,6 +193,7 @@ const EchoCreator = ({ data }) => {
 
     return (
         <div className="mx-auto mt-20 flex flex-col gap-8 pl-[128px]">
+            <h2 className="text-center text-2xl font-bold">Generate tickets to go to the client queue (dev/test)</h2>
             <div className="bg-slate-100 rounded shadow-md p-6 flex flex-col gap-6">
                 {loading ? (
                     <>
@@ -275,7 +276,7 @@ const EchoCreator = ({ data }) => {
                             </Card>
                             <TextField
                                 min={1}
-                                max={10}
+                                max={50}
                                 type="number"
                                 name="Quantity"
                                 label="Quantity"

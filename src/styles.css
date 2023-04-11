@@ -172,6 +172,13 @@ button:hover {
     border-radius: 10px;
 }
 
+.inset-center {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+}
+
 /* Medium screen devices (768px and above) */
 @media only screen and (max-width: 768px) {
     .main-container {

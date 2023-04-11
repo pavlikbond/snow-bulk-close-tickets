@@ -13,6 +13,7 @@ import GroupMappings from "./components/GroupMappings";
 import { useEffect, useState } from "react";
 import { UserProvider } from "./components/UserContext";
 import EchoCreator from "./components/EchoCreator";
+import MappingGenerator from "./components/MappingGenerator";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
     const [companyDataList, setCompanyDataList] = useState([]);
     const [error, setError] = useState("");
     useEffect(() => {
+        //get companies for mapping tables
         fetch(`${process.env.REACT_APP_API_ENDPOINT}/mappings?companies=true`, {
             headers: {
                 "x-api-key": process.env.REACT_APP_API_KEY,
@@ -75,6 +77,7 @@ function App() {
                             <Route path="/queueReader/" element={<QueueReader data={companyDataList} />} />
                             <Route path="/groupMapping/" element={<GroupMappings data={companyData} />} />
                             <Route path="/ticketGenerator/" element={<EchoCreator data={companyData} />} />
+                            <Route path="/mappingGenerator/" element={<MappingGenerator />} />
                         </Routes>
                     </div>
                 </UserProvider>
