@@ -26,7 +26,7 @@ const lorem = new LoremIpsum({
   },
 });
 
-const EchoCreator = ({ data }) => {
+const Test = ({ data }) => {
   const [loading, setLoading] = useState(true);
   const [companyData, setCompanyData] = useState({});
   const [companyList, setCompanyList] = useState([]);
@@ -354,4 +354,4 @@ const CopyIcon = ({ text }) => {
   );
 };
 
-export default EchoCreator;
+export default Test;
