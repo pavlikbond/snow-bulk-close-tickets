@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
 import { FaRegTrashAlt, FaMapSigns } from "react-icons/fa";
 import { HiQueueList, HiTicket } from "react-icons/hi2";
-import { BiCodeCurly } from "react-icons/bi";
+import { BiCodeCurly, BiSearchAlt } from "react-icons/bi";
 import Skeleton from "@mui/material/Skeleton";
 
 const Home = () => {
@@ -32,39 +32,46 @@ const Home = () => {
           </div>
         </CardContent>
       </Card>
-      <div className="flex justify-center gap-3 flex-wrap">
+      <div className="grid grid-cols-3 gap-3 w-fit mx-auto">
         <Link to="/bulkCloser">
-          <button className="btn btn-primary">
+          <button className="w-64 bg-cyan-400 duration-200 text-slate-800 font-semibold text-xl flex items-center px-4 py-4 rounded shadow">
             <FaRegTrashAlt size="28" className="mr-3" />
             Ticket Closer
           </button>
         </Link>
         <Link to="queueReader">
-          <button className="btn btn-primary">
+          <button className="w-64 bg-cyan-400 duration-200 text-slate-800 font-semibold text-xl flex items-center px-4 py-4 rounded shadow">
             {" "}
             <HiQueueList size="28" className="mr-3" />
             Queue Reader
           </button>
         </Link>
         <Link to="groupMapping">
-          <button className="btn btn-primary">
+          <button className="w-64 bg-cyan-400 duration-200 text-slate-800 font-semibold text-xl flex items-center px-4 py-4 rounded shadow">
             {" "}
             <FaMapSigns size="28" className="mr-3" />
             Group Mapping
           </button>
         </Link>
         <Link to="ticketGenerator">
-          <button className="btn btn-primary">
+          <button className="w-64 bg-cyan-400 duration-200 text-slate-800 font-semibold text-xl flex items-center px-4 py-4 rounded shadow">
             {" "}
             <HiTicket size="28" className="mr-3" />
             Ticket Generator
           </button>
         </Link>
         <Link to="mappingGenerator">
-          <button className="btn btn-primary">
+          <button className="w-64 bg-cyan-400 duration-200 text-slate-800 font-semibold text-xl flex items-center px-4 py-4 rounded shadow">
             {" "}
             <BiCodeCurly size="28" className="mr-3" />
             Mapping Object
+          </button>
+        </Link>
+        <Link to="groupfinder">
+          <button className="w-64 bg-cyan-400 duration-200 text-slate-800 font-semibold text-xl flex items-center px-4 py-4 rounded shadow">
+            {" "}
+            <BiSearchAlt size="28" className="mr-3" />
+            Group Finder
           </button>
         </Link>
       </div>

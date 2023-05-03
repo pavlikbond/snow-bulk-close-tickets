@@ -15,6 +15,7 @@ import { UserProvider } from "./components/UserContext";
 import EchoCreator from "./components/EchoCreator";
 import MappingGenerator from "./components/MappingGenerator";
 import Test from "./components/Test";
+import GroupFinder from "./components/GroupFinder";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
               <Route path="/groupMapping/" element={<GroupMappings data={companyData} />} />
               <Route path="/ticketGenerator/" element={<EchoCreator data={companyData} />} />
               <Route path="/mappingGenerator/" element={<MappingGenerator />} />
+              <Route path="/groupfinder/" element={<GroupFinder data={companyData} />} />
               <Route path="/test/" element={<Test data={companyData} />} />
             </Routes>
           </div>

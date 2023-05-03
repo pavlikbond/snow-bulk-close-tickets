@@ -8,7 +8,8 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import ErrorIcon from "@mui/icons-material/Error";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
-const Test = ({ data }) => {
+
+const GroupFinder = ({ data }) => {
   const [companyData, setCompanyData] = useState([]);
   const [input, setInput] = useState("");
   const [foundResults, setFoundResults] = useState([]);
@@ -86,12 +87,19 @@ const Test = ({ data }) => {
     setExactSearch(!exactSearch);
   };
 
+  const keyPress = (e) => {
+    if (e.keyCode == 13) {
+      findMappedGroup();
+    }
+  };
+
   return (
-    <div className="mt-10 flex flex-col gap-4 mx-auto">
+    <div className="my-10 flex flex-col gap-4 mx-auto">
       {waitingForData && <CircularProgress />}
       {!waitingForData && (
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-4 justify-center rounded shadow bg-slate-50 p-6">
           <OutlinedInput
+            placeholder="Enter Group Name"
             autoFocus
             className="bg-white"
             variant="outlined"
@@ -99,6 +107,7 @@ const Test = ({ data }) => {
               setInput(e.target.value);
             }}
             value={input}
+            onKeyDown={keyPress}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -112,15 +121,19 @@ const Test = ({ data }) => {
             }
           />
           <div className="flex items-center">
-            <Switch onChange={handleSwitchChange} defaultChecked />
+            <IOSSwitch onChange={handleSwitchChange} sx={{ m: 1 }} defaultChecked />
             {exactSearch ? (
               <span className="text-slate-600 text-lg font-semibold">Exact Match</span>
             ) : (
               <span className="text-slate-600 text-lg font-semibold">Partial Match</span>
             )}
           </div>
-          <IOSSwitch sx={{ m: 1 }} defaultChecked />
-          <Button className="" variant="contained" onClick={findMappedGroup} disabled={loading || !input.length}>
+          <Button
+            sx={{ padding: "0 40px", fontSize: "1rem" }}
+            variant="contained"
+            onClick={findMappedGroup}
+            disabled={loading || !input.trim().length}
+          >
             {loading && <CircularProgress className="mr-2" size={20} color="inherit" />}
             Find
           </Button>
@@ -181,7 +194,7 @@ const IOSSwitch = styled((props) => <Switch focusVisibleClassName=".Mui-focusVis
         transform: "translateX(16px)",
         color: "#fff",
         "& + .MuiSwitch-track": {
-          backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
+          backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#338ecf",
           opacity: 1,
           border: 0,
         },
@@ -190,7 +203,7 @@ const IOSSwitch = styled((props) => <Switch focusVisibleClassName=".Mui-focusVis
         },
       },
       "&.Mui-focusVisible .MuiSwitch-thumb": {
-        color: "#33cf4d",
+        color: "#338ecf",
         border: "6px solid #fff",
       },
       "&.Mui-disabled .MuiSwitch-thumb": {
@@ -207,7 +220,7 @@ const IOSSwitch = styled((props) => <Switch focusVisibleClassName=".Mui-focusVis
     },
     "& .MuiSwitch-track": {
       borderRadius: 26 / 2,
-      backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
+      backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#338ecf",
       opacity: 1,
       transition: theme.transitions.create(["background-color"], {
         duration: 500,
@@ -216,4 +229,4 @@ const IOSSwitch = styled((props) => <Switch focusVisibleClassName=".Mui-focusVis
   })
 );
 
-export default Test;
+export default GroupFinder;
