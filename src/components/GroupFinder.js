@@ -30,32 +30,37 @@ const GroupFinder = ({ data }) => {
     setLoading(true);
     setFoundResults([]);
     let results = [];
+    console.log(companyData);
     for (let company of companyData) {
       for (let data of company.tableData) {
-        for (let allMapping of data.mappings) {
-          for (let groupMapping of allMapping.mapping.groups) {
-            if (exactSearch) {
-              if (groupMapping.ensonoVal === input.trim()) {
-                let result = {
-                  table: data.tableName,
-                  companyName: allMapping.Company,
-                  tableName: company.name,
-                  group: groupMapping.ensonoVal,
-                };
-                results.push(result);
-              }
-            } else {
-              if (groupMapping.ensonoVal?.includes(input.trim())) {
-                let result = {
-                  table: data.tableName,
-                  companyName: allMapping.Company,
-                  tableName: company.name,
-                  group: groupMapping.ensonoVal,
-                };
-                results.push(result);
+        try {
+          for (let allMapping of data.mappings) {
+            for (let groupMapping of allMapping.mapping.groups) {
+              if (exactSearch) {
+                if (groupMapping.ensonoVal === input.trim()) {
+                  let result = {
+                    table: data.tableName,
+                    companyName: allMapping.Company,
+                    tableName: company.name,
+                    group: groupMapping.ensonoVal,
+                  };
+                  results.push(result);
+                }
+              } else {
+                if (groupMapping.ensonoVal?.includes(input.trim())) {
+                  let result = {
+                    table: data.tableName,
+                    companyName: allMapping.Company,
+                    tableName: company.name,
+                    group: groupMapping.ensonoVal,
+                  };
+                  results.push(result);
+                }
               }
             }
           }
+        } catch (error) {
+          console.log(company);
         }
       }
     }

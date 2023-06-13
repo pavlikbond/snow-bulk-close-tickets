@@ -3,7 +3,7 @@ import { FaRegTrashAlt, FaMapSigns } from "react-icons/fa";
 import { HiQueueList, HiTicket } from "react-icons/hi2";
 import { FiLogOut } from "react-icons/fi";
 import { BiCodeCurly, BiSearchAlt } from "react-icons/bi";
-import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineFolderOpen } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
@@ -18,6 +18,7 @@ const SideBar = () => {
         <SideBarIcon icon={<HiTicket size="28" />} text="Ticket Generator" route="/ticketGenerator" />
         <SideBarIcon icon={<BiCodeCurly size="28" />} text="Mapping Object" route="/mappingGenerator" />
         <SideBarIcon icon={<BiSearchAlt size="28" />} text="Group Finder" route="/groupfinder" />
+        <SideBarIcon icon={<AiOutlineFolderOpen size="28" />} text="Files" route="/files" />
       </div>
       <div className="logout">
         <SideBarIcon icon={<FiLogOut size="28" />} text="Sign Out" signOut={true} />
