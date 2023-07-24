@@ -1,13 +1,19 @@
-import React from "react";
-import { FaRegTrashAlt, FaMapSigns } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaRegTrashAlt, FaMapSigns, FaRegFlag } from "react-icons/fa";
 import { HiQueueList, HiTicket } from "react-icons/hi2";
 import { FiLogOut } from "react-icons/fi";
 import { BiCodeCurly, BiSearchAlt } from "react-icons/bi";
 import { AiOutlineHome, AiOutlineFolderOpen } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import { useUserRole } from "./UserContext";
 
 const SideBar = () => {
+  const [isDev, setIsDev] = useState(false);
+  const role = useUserRole();
+  useEffect(() => {
+    setIsDev(role === "developer");
+  }, [role]);
   return (
     <div className="sticky top-0 left-0 min-w-[64px] min-h-screen h-full w-16 m-0 flex flex-col bg-gray-900 text-white shadow-md gap-16 z-50">
       <div className="mt-5">
@@ -15,9 +21,14 @@ const SideBar = () => {
         <SideBarIcon icon={<FaRegTrashAlt size="28" />} text="Bulk Closer" route="/bulkCloser" />
         <SideBarIcon icon={<HiQueueList size="28" />} text="Queue Reader" route="/queueReader" />
         <SideBarIcon icon={<FaMapSigns size="28" />} text="Group Mappings" route="/groupMapping" />
-        <SideBarIcon icon={<HiTicket size="28" />} text="Ticket Generator" route="/ticketGenerator" />
-        <SideBarIcon icon={<BiCodeCurly size="28" />} text="Mapping Object" route="/mappingGenerator" />
-        <SideBarIcon icon={<BiSearchAlt size="28" />} text="Group Finder" route="/groupfinder" />
+        {isDev && (
+          <>
+            <SideBarIcon icon={<HiTicket size="28" />} text="Ticket Generator" route="/ticketGenerator" />
+            <SideBarIcon icon={<BiCodeCurly size="28" />} text="Mapping Object" route="/mappingGenerator" />
+            <SideBarIcon icon={<BiSearchAlt size="28" />} text="Group Finder" route="/groupfinder" />
+            <SideBarIcon icon={<FaRegFlag size="25" />} text="Flags" route="/flags" />
+          </>
+        )}
         <SideBarIcon icon={<AiOutlineFolderOpen size="28" />} text="Files" route="/files" />
       </div>
       <div className="logout">

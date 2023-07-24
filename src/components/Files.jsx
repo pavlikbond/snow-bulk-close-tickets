@@ -138,6 +138,7 @@ const File = ({ folderName, files }) => {
             {files.map((file) => {
               return (
                 <ListItem
+                  className="hover:bg-slate-100 transition-all duration-300"
                   key={file}
                   secondaryAction={
                     <IconButton
@@ -147,14 +148,18 @@ const File = ({ folderName, files }) => {
                         downloadFile(file);
                       }}
                     >
-                      <DownloadIcon />
+                      <DownloadIcon className="text-emerald-400" />
                     </IconButton>
                   }
                 >
                   <ListItemIcon>
                     <img src={getIcon(file)} alt="pdf" className="w-6 h-6" />
                   </ListItemIcon>
-                  <ListItemText primary={file} />
+                  <ListItemText
+                    primary={file}
+                    className="text-slate-500"
+                    primaryTypographyProps={{ fontWeight: "600" }}
+                  />
                 </ListItem>
               );
             })}

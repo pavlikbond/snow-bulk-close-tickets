@@ -8,7 +8,6 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { TailSpin } from "react-loader-spinner";
-import Button from "@mui/material/Button";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BsFillStopFill, BsFillPlayFill } from "react-icons/bs";
 
@@ -66,6 +65,31 @@ const QueueReaderCard = ({ id, deleteQueueCard, companyDataList }) => {
   const [companyError, setCompanyError] = useState(false);
   const [error, setError] = useState("");
   const startTime = useRef(0);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    function fitText() {
+      const containerWidth = containerRef.current.offsetWidth;
+      const fitTextElement = containerRef.current.querySelector(".fit-text");
+      const originalFontSize = parseFloat(getComputedStyle(fitTextElement).fontSize);
+      let fontSize = originalFontSize;
+      let textWidth = fitTextElement.scrollWidth;
+
+      while (textWidth > containerWidth) {
+        console.log(textWidth, containerWidth);
+        fontSize -= 1;
+        fitTextElement.style.fontSize = `${fontSize}px`;
+        textWidth = fitTextElement.scrollWidth;
+      }
+
+      // Optional: Reset font size to original if text becomes shorter
+      if (textWidth < containerWidth && fontSize < originalFontSize) {
+        fitTextElement.style.fontSize = `${originalFontSize}px`;
+      }
+    }
+
+    fitText();
+  }, [inQueue]);
 
   let stopInterval = () => {
     if (interval) {
@@ -197,9 +221,9 @@ const QueueReaderCard = ({ id, deleteQueueCard, companyDataList }) => {
         <ColorToggleButton alignment={alignment} setAlignment={setAlignment} company={company} />
       </div>
       <div className="flex gap-3">
-        <div className={inQueue > 0 ? "queue-card-red" : "queue-card-green"}>
+        <div className={(inQueue > 0 ? "queue-card-red" : "queue-card-green") + " container"} ref={containerRef}>
           <h2 className="text-2xl font-bold text-slate-700">In Queue</h2>
-          <div className="text-6xl font-bold text-slate-700">{inQueue}</div>
+          <p className="text-6xl font-bold text-slate-700 fit-text whitespace-nowrap">{inQueue}</p>
         </div>
         <div className={inFlight > 0 ? "queue-card-red" : "queue-card-green"}>
           <h2 className="text-2xl font-bold text-slate-700">In Flight</h2>

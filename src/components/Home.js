@@ -2,16 +2,21 @@ import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
-import { FaRegTrashAlt, FaMapSigns } from "react-icons/fa";
+import { FaRegTrashAlt, FaMapSigns, FaRegFlag } from "react-icons/fa";
 import { HiQueueList, HiTicket } from "react-icons/hi2";
 import { BiCodeCurly, BiSearchAlt } from "react-icons/bi";
 import Skeleton from "@mui/material/Skeleton";
 import { AiOutlineHome, AiOutlineFolderOpen } from "react-icons/ai";
-
+import { useUserRole } from "./UserContext";
 const buttonStyle =
-  "w-64 bg-gradient-to-r from-cyan-500 to-blue-500 duration-200 text-white font-semibold text-xl flex items-center px-4 py-4 rounded shadow";
+  "w-64 bg-cyan-500 duration-200 text-white font-semibold text-xl flex items-center px-4 py-4 rounded shadow";
 const Home = () => {
   const [fact, setFact] = useState("");
+  const role = useUserRole();
+  const [isDev, setIsDev] = useState(false);
+  useEffect(() => {
+    setIsDev(role === "developer");
+  }, [role]);
 
   useEffect(() => {
     fetch("https://uselessfacts.jsph.pl/api/v2/facts/random?language=en")
@@ -56,27 +61,38 @@ const Home = () => {
             Group Mapping
           </button>
         </Link>
-        <Link to="ticketGenerator">
-          <button className={buttonStyle}>
-            {" "}
-            <HiTicket size="28" className="mr-3" />
-            Ticket Generator
-          </button>
-        </Link>
-        <Link to="mappingGenerator">
-          <button className={buttonStyle}>
-            {" "}
-            <BiCodeCurly size="28" className="mr-3" />
-            Mapping Object
-          </button>
-        </Link>
-        <Link to="groupfinder">
-          <button className={buttonStyle}>
-            {" "}
-            <BiSearchAlt size="28" className="mr-3" />
-            Group Finder
-          </button>
-        </Link>
+        {isDev && (
+          <>
+            <Link to="ticketGenerator">
+              <button className={buttonStyle}>
+                {" "}
+                <HiTicket size="28" className="mr-3" />
+                Ticket Generator
+              </button>
+            </Link>
+            <Link to="mappingGenerator">
+              <button className={buttonStyle}>
+                {" "}
+                <BiCodeCurly size="28" className="mr-3" />
+                Mapping Object
+              </button>
+            </Link>
+            <Link to="groupfinder">
+              <button className={buttonStyle}>
+                {" "}
+                <BiSearchAlt size="28" className="mr-3" />
+                Group Finder
+              </button>
+            </Link>
+            <Link to="flags">
+              <button className={buttonStyle}>
+                {" "}
+                <FaRegFlag size="25" className="mr-3" />
+                Flags
+              </button>
+            </Link>
+          </>
+        )}
         <Link to="files">
           <button className={buttonStyle}>
             {" "}

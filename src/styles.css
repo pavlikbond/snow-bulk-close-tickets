@@ -1,220 +1,220 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
 * {
-    box-sizing: border-box;
-    font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
 }
 
 body {
-    background-color: rgb(221, 237, 241);
-    min-height: 100vh;
+  background-color: rgb(221, 237, 241);
+  min-height: 100vh;
 }
 
 .main-container {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 8vh 5vw 0 5vw;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 8vh 5vw 0 5vw;
 }
 
 h1,
 .responses-header {
-    text-align: center;
-    font-weight: 700;
-    font-size: 3rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 3rem;
 }
 
 .directions {
-    display: block;
-    margin-top: 10px;
-    background-color: #3d4451;
-    color: white;
-    padding: 10px 5px;
-    width: 100%;
-    text-align: center;
-    border-radius: 4px 4px 0 0;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+  display: block;
+  margin-top: 10px;
+  background-color: #3d4451;
+  color: white;
+  padding: 10px 5px;
+  width: 100%;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 .form,
 .all-responses-container {
-    width: 500px;
-    min-height: 660px;
-    padding: 1%;
-    border-radius: 1%;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
+  width: 500px;
+  min-height: 660px;
+  padding: 1%;
+  border-radius: 1%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
 
-    overflow: auto;
+  overflow: auto;
 }
 .all-responses-container {
-    max-height: 685px;
+  max-height: 685px;
 }
 
 .form {
-    max-height: fit-contet;
+  max-height: fit-contet;
 }
 
 .form {
-    transition: all 0.2s ease;
-    margin-right: 15px;
+  transition: all 0.2s ease;
+  margin-right: 15px;
 }
 
 textarea::placeholder {
-    font-weight: 700;
-    color: rgb(183, 182, 182);
+  font-weight: 700;
+  color: rgb(183, 182, 182);
 }
 
 .clear-btn,
 .submit-btn,
 .loading-btn,
 .print-csv-btn {
-    margin-top: 10px;
-    border-radius: 10px;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 100%;
-    font-weight: 700;
-    line-height: 24px;
-    opacity: 1;
-    outline: 0 solid transparent;
-    padding: 8px 25px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: 120px;
-    min-width: 110px;
-    word-break: break-word;
-    border: 0;
-    transition: all 0.2s ease;
-    margin-right: 10px;
-    height: 44px;
+  margin-top: 10px;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 100%;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 25px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 120px;
+  min-width: 110px;
+  word-break: break-word;
+  border: 0;
+  transition: all 0.2s ease;
+  margin-right: 10px;
+  height: 44px;
 }
 
 .button-container {
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .print-csv-btn {
-    margin-top: 0;
-    width: fit-content;
+  margin-top: 0;
+  width: fit-content;
 }
 
 button:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
 }
 
 .response {
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    position: relative;
-    transition: all 0.3s ease;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .response .ticket-number {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
 }
 .all-responses-container {
-    height: auto;
-    overflow: hidden;
+  height: auto;
+  overflow: hidden;
 }
 
 .close-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .close-btn:hover {
-    color: black;
-    transform: scale(1.2);
+  color: black;
+  transform: scale(1.2);
 }
 
 .response-message {
-    width: 93%;
+  width: 93%;
 }
 
 .note {
-    padding: 4px 0;
+  padding: 4px 0;
 }
 .resolved {
-    background-color: rgb(174, 252, 174);
-    padding: 4px 4px 4px 0;
-    border-radius: 5px;
-    display: inline-block;
+  background-color: rgb(174, 252, 174);
+  padding: 4px 4px 4px 0;
+  border-radius: 5px;
+  display: inline-block;
 }
 
 .all-responses {
-    overflow: auto;
-    height: fit-content;
-    max-height: 430px;
+  overflow: auto;
+  height: fit-content;
+  max-height: 430px;
 }
 /* AWS Cognito Login styles*/
 
 .amplify-button[data-variation="primary"] {
-    background: #570df8;
+  background: #570df8;
 }
 .amplify-button[data-variation="primary"]:hover {
-    background: #510ce7;
-    transform: scale(1.01);
+  background: #510ce7;
+  transform: scale(1.01);
 }
 .authenticator {
-    padding-top: 20vh;
+  padding-top: 20vh;
 }
 .authenticator div div {
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
 .inset-center {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
 }
 
 /* Medium screen devices (768px and above) */
 @media only screen and (max-width: 768px) {
-    .main-container {
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
+  .main-container {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 
-        padding: 10px;
-    }
+    padding: 10px;
+  }
 
-    .form,
-    .all-responses-container {
-        width: 90vw;
-        min-width: 350px;
-    }
-    .form {
-        overflow: auto;
-        min-height: none;
-        height: fit-content;
-        min-width: 450px;
-        margin-right: 0;
-        max-height: fit-content;
-    }
+  .form,
+  .all-responses-container {
+    width: 90vw;
+    min-width: 350px;
+  }
+  .form {
+    overflow: auto;
+    min-height: none;
+    height: fit-content;
+    min-width: 450px;
+    margin-right: 0;
+    max-height: fit-content;
+  }
 
-    .all-responses-container {
-        margin-top: 5%;
-    }
+  .all-responses-container {
+    margin-top: 5%;
+  }
 
-    textarea {
-        min-height: 200px;
-    }
+  textarea {
+    min-height: 200px;
+  }
 
-    button {
-        font-size: 80%;
-        padding-left: 12px;
-        padding-right: 12px;
-        white-space: nowrap;
-    }
+  button {
+    font-size: 80%;
+    padding-left: 12px;
+    padding-right: 12px;
+    white-space: nowrap;
+  }
 }

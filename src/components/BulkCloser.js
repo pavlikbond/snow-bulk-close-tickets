@@ -9,7 +9,6 @@ import Radios from "./Radios";
 import { BiError } from "react-icons/bi";
 import SubmitModal from "./SubmitModal";
 import { Auth } from "aws-amplify";
-import { SideBar } from "./SideBar";
 
 function BulkCloser() {
   let userInfo = {};

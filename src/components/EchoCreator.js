@@ -105,7 +105,7 @@ const EchoCreator = ({ data }) => {
         description: "Long Description Test ", //description,
         priority: "1",
         group: group,
-        clientTicketNumber: Date.now(),
+        //clientTicketNumber: Date.now(),
       },
     };
     console.log(apiPayload);
