@@ -18,6 +18,7 @@ import Test from "./components/Test";
 import GroupFinder from "./components/GroupFinder";
 import Files from "./components/Files";
 import FlagFinder from "./components/FlagFinder";
+import GroupMapper from "./components/GroupMapper";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
               <Route path="/test/" element={<Test data={companyData} />} />
               <Route path="/files" element={<Files />} />
               <Route path="/flags" element={<FlagFinder data={companyData} />} />
+              <Route path="/groupmapper" element={<GroupMapper />} />
             </Routes>
           </div>
         </UserProvider>

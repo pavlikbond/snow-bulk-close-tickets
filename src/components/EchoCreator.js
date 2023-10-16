@@ -11,10 +11,7 @@ import { LoremIpsum } from "lorem-ipsum";
 // import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import { IoCopy } from "react-icons/io5";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
+
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
     max: 8,
@@ -102,7 +99,7 @@ const EchoCreator = ({ data }) => {
         ticketType: ticketType,
         short_description: "Short Description Test ", //shortDescription,
         shortDescription: "Short Description Test ", // shortDescription,
-        description: "Long Description Test ", //description,
+        description: lorem.generateSentences(2000), //description,
         priority: "1",
         group: group,
         //clientTicketNumber: Date.now(),

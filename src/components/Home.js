@@ -6,8 +6,9 @@ import { FaRegTrashAlt, FaMapSigns, FaRegFlag } from "react-icons/fa";
 import { HiQueueList, HiTicket } from "react-icons/hi2";
 import { BiCodeCurly, BiSearchAlt } from "react-icons/bi";
 import Skeleton from "@mui/material/Skeleton";
-import { AiOutlineHome, AiOutlineFolderOpen } from "react-icons/ai";
+import { AiOutlineFolderOpen } from "react-icons/ai";
 import { useUserRole } from "./UserContext";
+import DataArrayIcon from "@mui/icons-material/DataArray";
 const buttonStyle =
   "w-64 bg-cyan-500 duration-200 text-white font-semibold text-xl flex items-center px-4 py-4 rounded shadow";
 const Home = () => {
@@ -75,6 +76,13 @@ const Home = () => {
                 {" "}
                 <BiCodeCurly size="28" className="mr-3" />
                 Mapping Object
+              </button>
+            </Link>
+            <Link to="groupmapper">
+              <button className={buttonStyle}>
+                {" "}
+                <DataArrayIcon size="25" className="mr-3" />
+                Group Mapper
               </button>
             </Link>
             <Link to="groupfinder">

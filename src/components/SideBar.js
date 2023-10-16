@@ -7,7 +7,7 @@ import { AiOutlineHome, AiOutlineFolderOpen } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { useUserRole } from "./UserContext";
-
+import DataArrayIcon from "@mui/icons-material/DataArray";
 const SideBar = () => {
   const [isDev, setIsDev] = useState(false);
   const role = useUserRole();
@@ -25,6 +25,7 @@ const SideBar = () => {
           <>
             <SideBarIcon icon={<HiTicket size="28" />} text="Ticket Generator" route="/ticketGenerator" />
             <SideBarIcon icon={<BiCodeCurly size="28" />} text="Mapping Object" route="/mappingGenerator" />
+            <SideBarIcon icon={<DataArrayIcon size="25" />} text="Group Mapper" route="/groupmapper" />
             <SideBarIcon icon={<BiSearchAlt size="28" />} text="Group Finder" route="/groupfinder" />
             <SideBarIcon icon={<FaRegFlag size="25" />} text="Flags" route="/flags" />
           </>

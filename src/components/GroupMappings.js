@@ -11,13 +11,20 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Skeleton from "@mui/material/Skeleton";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-
+import Link from "@mui/material/Link";
+import { useUserRole } from "./UserContext";
 const GroupMappings = ({ data }) => {
   const [value, setValue] = useState(1);
   const [companyData, setCompanyData] = useState([]);
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [selectedMapping, setSelectedMapping] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isDev, setIsDev] = useState(false);
+  const role = useUserRole();
+
+  useEffect(() => {
+    setIsDev(role === "developer");
+  }, [role]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -116,7 +123,18 @@ const GroupMappings = ({ data }) => {
           </Box>
           <div className="">
             <div className="text-xl py-2">
-              Table Name: <span className="font-semibold"> {selectedMapping.tableName}</span>
+              Table Name:{" "}
+              {isDev ? (
+                <Link
+                  href={`https://us-west-1.console.aws.amazon.com/dynamodbv2/home?region=us-west-1#edit-item?itemMode=2&pk=${selectedCompany.APIKeyId}&route=ROUTE_ITEM_EXPLORER&sk=&table=${selectedMapping.tableName}`}
+                  rel="noopener"
+                  target="_blank"
+                >
+                  {selectedMapping.tableName}
+                </Link>
+              ) : (
+                <span className="font-semibold"> {selectedMapping.tableName}</span>
+              )}
             </div>
             <MyAccordion data={selectedMapping.mappings} />
           </div>

@@ -28,6 +28,7 @@ const FlagFinder = ({ data }) => {
     if (data.length) {
       for (let item of data) {
         for (let envItem of item?.tableData) {
+          if (!envItem?.mappings) continue;
           for (let mapping of envItem?.mappings) {
             for (let name of Object.keys(mapping.mapping)) {
               const tempObj = {
