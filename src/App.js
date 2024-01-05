@@ -19,12 +19,27 @@ import GroupFinder from "./components/GroupFinder";
 import Files from "./components/Files";
 import FlagFinder from "./components/FlagFinder";
 import GroupMapper from "./components/GroupMapper";
+import StackSetPage from "./components/StackSetPage";
+import Documentation from "./components/documentation/Documentation";
+import Overview from "./components/documentation/Overview";
+import Create from "./components/documentation/Create";
+import Update from "./components/documentation/Update";
+import ReadQueue from "./components/documentation/ReadQueue.jsx";
+import { Outlet } from "react-router-dom";
+import CommentsPage from "./components/documentation/CommentsPage.jsx";
+import ReturnPtnPage from "./components/documentation/ReturnPtnPage.jsx";
+import DocsHomePage from "./components/documentation/DocsHomePage.jsx";
+import ApproveRejectPage from "./components/documentation/ApproveRejectPage.jsx";
+import DeletePage from "./components/documentation/DeletePage.jsx";
+import GetTicketDetailsPage from "./components/documentation/GetTicketDetailsPage.jsx";
+import EchoPage from "./components/documentation/EchoPage.jsx";
 Amplify.configure(awsconfig);
 
 function App() {
   const [companyData, setCompanyData] = useState({});
   const [companyDataList, setCompanyDataList] = useState([]);
-  const [error, setError] = useState("");
+  const [, setError] = useState("");
+  const [usefulLinks, setUsefulLinks] = useState([]);
   useEffect(() => {
     //get companies for mapping tables
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/mappings`, {
@@ -49,7 +64,22 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setCompanyDataList(data);
+        setCompanyDataList([...data]);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError("Error connecting to API");
+      });
+
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/getLinks`, {
+      headers: {
+        "x-api-key": process.env.REACT_APP_API_KEY,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setUsefulLinks(data);
       })
       .catch((err) => {
         console.log(err);
@@ -77,8 +107,9 @@ function App() {
         <UserProvider>
           <div className="flex">
             <SideBar />
+
             <Routes>
-              <Route path="/" element={<Home />}></Route>
+              <Route path="/" element={<Home data={usefulLinks} />}></Route>
               <Route path="/bulkCloser/" element={<BulkCloser />} />
               <Route path="/queueReader/" element={<QueueReader data={companyDataList} />} />
               <Route path="/groupMapping/" element={<GroupMappings data={companyData} />} />
@@ -89,17 +120,39 @@ function App() {
               <Route path="/files" element={<Files />} />
               <Route path="/flags" element={<FlagFinder data={companyData} />} />
               <Route path="/groupmapper" element={<GroupMapper />} />
+              <Route path="/stacksets" element={<StackSetPage />}></Route>
+              <Route path="/docs" element={<Documentation />}>
+                <Route path="" element={<DocsHomePage />} />
+                <Route path="overview" element={<Overview />} />
+                <Route path="incident-request" element={<Outlet />}>
+                  <Route path="create" element={<Create />} />
+                  <Route path="update" element={<Update />} />
+                  <Route path="comments" element={<CommentsPage ticketType="Case" />} />
+                  <Route path="return-ptn" element={<ReturnPtnPage ticketType="Case" />} />
+                  <Route path="queue" element={<ReadQueue key="/incident-request/queue" isCase={true} />} />
+                </Route>
+                <Route path="change" element={<Outlet />}>
+                  <Route path="approve-reject" element={<ApproveRejectPage />} />
+                  <Route path="comments" element={<CommentsPage ticketType="Change" />} />
+                  <Route path="return-ptn" element={<ReturnPtnPage ticketType="Change" />} />
+                  <Route path="queue" element={<ReadQueue key="/change/queue" isCase={false} />} />
+                </Route>
+                <Route path="delete-from-queue" element={<DeletePage />} />
+                <Route path="get-ticket-details" element={<GetTicketDetailsPage />} />
+                <Route path="echo" element={<EchoPage />} />
+              </Route>
             </Routes>
           </div>
         </UserProvider>
       </Authenticator>
-      {/* <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="profile" element={<Profile />} />
-                <Route path="bulk-close-app" element={<BulkCloser />} />
-            </Routes> */}
     </>
   );
 }
+// const Placeholder = ({ name }) => (
+//   <div>
+//     <h1>{name} Page</h1>
+//     <p>This is a placeholder for the {name} page.</p>
+//   </div>
+// );
 
 export default App;

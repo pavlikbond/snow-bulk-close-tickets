@@ -1,0 +1,326 @@
+{
+  "change": [
+    {
+      "field": "clientName",
+      "comment": ""
+    },
+    {
+      "field": "clientTicketNumber",
+      "comment": ""
+    },
+    {
+      "field": "ticketType",
+      "comment": "Change"
+    },
+    {
+      "field": "ticketNumber",
+      "comment": "Ensono ticket number"
+    },
+    {
+      "field": "ensonoGroup",
+      "comment": "Ensono group name"
+    },
+    {
+      "field": "group",
+      "comment": "Mapped client group name"
+    },
+    {
+      "field": "approval",
+      "comment": "Approved, Rejected, Not Yet Requested, Requested"
+    },
+    {
+      "field": "openedAt",
+      "comment": "UTC"
+    },
+    {
+      "field": "updateOn",
+      "comment": "UTC"
+    },
+    {
+      "field": "requestedByName",
+      "comment": ""
+    },
+    {
+      "field": "shortDescription",
+      "comment": "Free-text. 160 characters"
+    },
+    {
+      "field": "type",
+      "comment": "Normal, Emergency, Standard"
+    },
+    {
+      "field": "category",
+      "comment": "Hardware, Software, Service, System Software, Applications Software, Network, Telecom, Documentation, Patching, Removal"
+    },
+    {
+      "field": "startDate",
+      "comment": "UTC. Schedule start date. Need to be converted to local time"
+    },
+    {
+      "field": "endDate",
+      "comment": "UTC. Schedule end date. Need to be converted to local time"
+    },
+    {
+      "field": "risk",
+      "comment": "Low, Moderate, High. Calculated based on risk assessment."
+    },
+    {
+      "field": "impact",
+      "comment": "Low, Medium, High"
+    },
+    {
+      "field": "description",
+      "comment": "Free-text. Description of the change. 4000 characters"
+    },
+    {
+      "field": "justification",
+      "comment": "Free-text. Reason details. 4000 characters"
+    },
+    {
+      "field": "preChangeChecks",
+      "comment": "Free-text. 4000 characters"
+    },
+    {
+      "field": "implementationPlan",
+      "comment": "Free-text. 4000 characters"
+    },
+    {
+      "field": "testPlan",
+      "comment": "Free-text. 4000 characters"
+    },
+    {
+      "field": "backoutPlan",
+      "comment": "Free-text. 4000 characters"
+    },
+    {
+      "field": "state",
+      "comment": "New, Assess, Authorize, Scheduled, Implement, Review, Closed, Cancelled"
+    },
+    {
+      "field": "cis",
+      "comment": "List of Cis separated by commas"
+    },
+    {
+      "field": "notes",
+      "comment": "Only included when transactionType is 'Notes'"
+    },
+    {
+      "field": "closeNotes",
+      "comment": "Free-text. 4000 characters. Only included when state is 'Closed'"
+    },
+    {
+      "field": "closeCode",
+      "comment": "Successful, Successful with issues, Successful Outside Change Window, Unsuccessful. Only included when state is 'Closed'"
+    }
+  ],
+  "case": [
+    {
+      "field": "clientName",
+      "onCreate": "Yes",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "Yes",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "clientTicketNumber",
+      "onCreate": "Yes",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "Yes",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "ticketType",
+      "onCreate": "Yes (Incident or Request)",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "Yes",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "ticketNumber",
+      "onCreate": "Yes (Ensono number)",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "Yes",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "urgency",
+      "onCreate": "Yes (1,2 or 3) or mapped value",
+      "onUpdate": "Yes",
+      "inChangedObject": "Yes",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "Yes"
+    },
+    {
+      "field": "impact",
+      "onCreate": "Yes (1,2 or 3) or mapped value",
+      "onUpdate": "Yes",
+      "inChangedObject": "Yes",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "Yes"
+    },
+    {
+      "field": "priority",
+      "onCreate": "Yes (1, 2, 3, or 4)",
+      "onUpdate": "Yes",
+      "inChangedObject": "Yes",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "group",
+      "onCreate": "Yes (mapped client value)",
+      "onUpdate": "Yes",
+      "inChangedObject": "Yes",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "cis",
+      "onCreate": "Yes (comma Separated)",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "category",
+      "onCreate": "Yes",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "Yes"
+    },
+    {
+      "field": "origin",
+      "onCreate": "Yes",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "Yes"
+    },
+    {
+      "field": "description",
+      "onCreate": "Yes (Free text)",
+      "onUpdate": "Yes",
+      "inChangedObject": "Yes",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "openedTime",
+      "onCreate": "Yes (Free text)",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "status",
+      "onCreate": "yes (Open)",
+      "onUpdate": "Yes",
+      "inChangedObject": "Yes",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "statusNextAction",
+      "onCreate": "See below",
+      "onUpdate": "Maybe",
+      "inChangedObject": "Maybe",
+      "onNotes": "No",
+      "onClose": "No",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "shortDescription",
+      "onCreate": "Yes (Free text)",
+      "onUpdate": "Yes",
+      "inChangedObject": "Yes",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "ensonoGroup",
+      "onCreate": "(Ensono group value)",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "Yes"
+    },
+    {
+      "field": "updatedOn",
+      "onCreate": "UTC",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "Yes"
+    },
+    {
+      "field": "closureCategory",
+      "onCreate": "No",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "Yes"
+    },
+    {
+      "field": "changed",
+      "onCreate": "No",
+      "onUpdate": "Yes",
+      "inChangedObject": "N/A",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "notes",
+      "onCreate": "(Ensono additional comment)",
+      "onUpdate": "No",
+      "inChangedObject": "No",
+      "onNotes": "Yes",
+      "onClose": "No",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "closeCode",
+      "onCreate": "(See below)",
+      "onUpdate": "No",
+      "inChangedObject": "No",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    },
+    {
+      "field": "closeNotes",
+      "onCreate": "(Free text)",
+      "onUpdate": "Yes",
+      "inChangedObject": "No",
+      "onNotes": "No",
+      "onClose": "Yes",
+      "mayBeIgnored": "No"
+    }
+  ],
+  "caseFooter": "Available values for “statusNextAction” when ticket state changed to pending are: \"pending-client\", \"pending-vendor\", \"pending-change\".\nAvailable values for “closeCode” when ticket state changed to resolved are: \"resolved\", \"unresolved\", \"cancelled\", \"resolved*\", \"unresolved*\".\nEvery field is included from Ensono in each transaction. On updates, the client system should only update fields that are found in the “changed”:{} object. Similarly, all fields are included on notes updates, but only the contents of “notes”:{} should be applied."
+}

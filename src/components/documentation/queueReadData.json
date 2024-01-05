@@ -1,0 +1,648 @@
+{
+  "nonEmpty": {
+    "MessageId": "0eb49bcf-53a7-4769-b37a-2342b3658a00",
+    "ReceiptHandle": "AQEBD4eNzuQjJoBJ+TRMwOo5Ub/VvF/AmGYEVoS...",
+    "MD5OfBody": "385b136e9129e7f0b282ed0657772ff5",
+    "Body": {
+      "clientName": "testClient",
+      "ticketNumber": "e-CS0879727",
+      "clientTicketNumber": "",
+      "ticketType": "Incident",
+      "status": "open",
+      "description": "test",
+      "shortDescription": "test",
+      "group": "Ensono Support",
+      "ensonoGroup": "CS - 1st Line",
+      "priority": "4",
+      "impact": "3",
+      "urgency": "3",
+      "openedTime": "2023-01-27T22:24:53Z",
+      "category": "Private Cloud",
+      "origin": "Web",
+      "cis": ""
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1674858487529",
+      "ApproximateReceiveCount": "3",
+      "SentTimestamp": "1674858334956",
+      "SequenceNumber": "18875507807458288128",
+      "MessageDeduplicationId": "fb1cf0cacb6943d49cf62593e60d7ecbb4b6baff0edaba7984d8d3ecaf41801c",
+      "MessageGroupId": "e-CS0879727",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Create"
+    }
+  },
+  "base": {
+    "ReceiveMessageResponse": {
+      "ResponseMetadata": {
+        "RequestId": "25801ffc-cbb7-5807-8626-41f31fb566a3"
+      },
+      "ReceiveMessageResult": {
+        "messages": []
+      }
+    }
+  },
+  "create": {
+    "MessageId": "0eb49bcf-53a7-4769-b37a-2342b3658a00",
+    "ReceiptHandle": "AQEBD4eNzuQjJoBJ+TRMwOo5Ub/VvF/AmGYEVooeBKrkEwUh+o9fOpYRpTJL0QhcOhOii+HM9xT41o5P020GA4Ugn0RPJyP2pSY7gfrs0VI4QTB6i9GbedsW1T6zwAtRqNPj62qoyudi0c//YtU9jWozN5kPwJ7Oe5OuWgz/4cCC1EwOFXVzhjrRLaFSmn+lEmPYn6npnuc0bkphh1kzb8fdDPUMnoSSdDOq3bfpi7z6fAD9cnPWzzB5VvHiudqdkORIJPdEKLu60pa7lM3CO5QuNpifiykUeEJb4Lho2Vn3d48=",
+    "MD5OfBody": "385b136e9129e7f0b282ed0657772ff5",
+    "Body": {
+      "clientName": "testClient",
+      "ticketNumber": "e-CS0879727",
+      "clientTicketNumber": "",
+      "ticketType": "Incident",
+      "status": "open",
+      "description": "test",
+      "shortDescription": "test",
+      "group": "Ensono Support",
+      "ensonoGroup": "CS - 1st Line",
+      "priority": "4",
+      "impact": "3",
+      "urgency": "3",
+      "openedTime": "2023-01-27T22:24:53Z",
+      "category": "Private Cloud",
+      "origin": "Web",
+      "cis": ""
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1674858487529",
+      "ApproximateReceiveCount": "3",
+      "SentTimestamp": "1674858334956",
+      "SequenceNumber": "18875507807458288128",
+      "MessageDeduplicationId": "fb1cf0cacb6943d49cf62593e60d7ecbb4b6baff0edaba7984d8d3ecaf41801c",
+      "MessageGroupId": "e-CS0879727",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Create"
+    }
+  },
+  "comment": {
+    "MessageId": "ed7da978-bf7b-4856-8eb7-ce33207017c0",
+    "ReceiptHandle": "AQEBqkX30Lc7rm8jBxPw+lXq/PNpuRmtOVpahuQTMxDxqUt53N82MydD69RcRsOR8CAei=",
+    "MD5OfBody": "d6f786ad67113c6494e4cb79b0f8ef3f",
+    "Body": {
+      "clientName": "ClientName",
+      "clientTicketNumber": "INC12721996",
+      "ticketType": "Incident",
+      "ticketNumber": "e-CS001486814",
+      "updatedOn": "2024-01-02T20:31:36Z",
+      "notes": {
+        "type": "comment",
+        "id": "8410057c1be7b150d40dedf5624bcb5c",
+        "body": "Example comment text from Ensono to Client",
+        "commenter": "John Doe",
+        "commenterEmail": "john.doe@Ensono.com"
+      }
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPKROIVCAGL:envxsn2qprod1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1704227589403",
+      "ApproximateReceiveCount": "1",
+      "SentTimestamp": "1704227543294",
+      "SequenceNumber": "18883026324792815616",
+      "MessageDeduplicationId": "b4c258769758ca99a2eb36238b5032984475661c6089b19f0b4ab1f93c0c386c",
+      "MessageGroupId": "e-CS001486814",
+      "AWSTraceHeader": "Root=1-659472d7-05f7e9d2575bbc7875edb093;Parent=0eabb9366bbcc59a;Sampled=0;Lineage=b0921061:0",
+      "ClientReferenceAvailable": true,
+      "TransactionType": "Notes"
+    }
+  },
+  "update": {
+    "MessageId": "fa4055b6-043e-4057-a362-4b56898aca5d",
+    "ReceiptHandle": "AQEBn9veQicg7VA26Coh5qoIXRsgvYTVofd9SDFwqFkFeH2lI/nRofGIEI2mBmj/ZU/vtGXWcoCvG+/OA1BTlKMDj4YXOgcdnUnbuyTsN5HDvWsA9Wwoa5u/jyKNDtFxFuylS24lY9P7AB2H0rMLOg2YDDKCbmLc689+3MggEURJGHld9yNLpy3JpeJ3hr8RbfHOOBprFDj/BrqfkcDWZtXmI2mM2jUqcJ3u+cmuk0cXzomjTV67gsZPDQXp3nVHpMlNk/W1SACI1GI/lg/krWrdeAWDEyuht7WWIceGLho4uio=",
+    "MD5OfBody": "5433a1890594fb7cc88ede76c8219fc0",
+    "Body": {
+      "clientName": "testClient",
+      "ticketNumber": "e-CS0879727",
+      "clientTicketNumber": "",
+      "ticketType": "Incident",
+      "status": "pending",
+      "description": "test",
+      "shortDescription": "test",
+      "group": "Ensono Support",
+      "ensonoGroup": "CS - 1st Line",
+      "priority": "4",
+      "impact": "3",
+      "urgency": "3",
+      "openedTime": "2023-01-27T22:24:53Z",
+      "category": "Private Cloud",
+      "origin": "Web",
+      "cis": "",
+      "offHoldDate": "2023-01-28T22:26:23Z",
+      "statusNextAction": "pending-caller",
+      "changed": {
+        "updatedOn": "2023-01-27T22:26:29Z",
+        "status": "pending",
+        "statusNextAction": "pending-caller",
+        "offHoldDate": "2023-01-28T22:26:23Z"
+      },
+      "updatedOn": "2023-01-27T22:26:29Z"
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1674858487529",
+      "ApproximateReceiveCount": "3",
+      "SentTimestamp": "1674858426053",
+      "SequenceNumber": "18875507830779119616",
+      "MessageDeduplicationId": "e71ce70ea6492c8621b64524094b45d55a0533c3e073eb846c876c501a886f8e",
+      "MessageGroupId": "e-CS0879727",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Update"
+    }
+  },
+  "closure": {
+    "MessageId": "2dc52062-aa59-4543-8381-af8724ffd002",
+    "ReceiptHandle": "AQEBow/CxSerKljYGwdKqHKSWxcuiuCiTH/mM5lKCz0waiX/sMNrU2V8M9GNKOfmj1h06N4Zgvk/gUqduBqC4qEQHXw9Lejep6UUEzmnPeWAdQac6uKrrZ/gNZuwJYnwgvTzJwXknXHqucZMl63vFrex8ff5DsOgzaiM5Na9oWDNV1JGctx0SFs+0RI6QDRIpPF33UNPjmvWmO7MniqUrk2dDXY2lOBGeEA8znAOp2Um33Oks8GMq+jY6FCvMxcALT++wX2cFUt8g9+VZPsTxEAMv3ajuvmsGe3egwegsocsdgw=",
+    "MD5OfBody": "0f8caf1e63c8b0340a73cadc566e4582",
+    "Body": {
+      "clientName": "testClient",
+      "ticketNumber": "e-CS0879727",
+      "clientTicketNumber": "",
+      "ticketType": "Incident",
+      "status": "resolved",
+      "description": "test",
+      "shortDescription": "test",
+      "group": "Ensono Support",
+      "priority": "4",
+      "impact": "3",
+      "urgency": "3",
+      "openedTime": "2023-01-27T22:24:53Z",
+      "category": "Private Cloud",
+      "origin": "Web",
+      "cis": "",
+      "closeNotes": "test close notes",
+      "closeCode": "resolved*",
+      "changed": {
+        "updatedOn": "2023-01-27T22:29:36Z",
+        "status": "resolved",
+        "closeNotes": "test close notes",
+        "closeCode": "resolved*"
+      },
+      "updatedOn": "2023-01-27T22:29:36Z"
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1674858633136",
+      "ApproximateReceiveCount": "2",
+      "SentTimestamp": "1674858604868",
+      "SequenceNumber": "18875507876555760384",
+      "MessageDeduplicationId": "a24e18a216babf1e8ef462dd3b9f0b3dc06eeb06d1a70fb09c5f4858a1693c4f",
+      "MessageGroupId": "e-CS0879727",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Closure"
+    }
+  },
+  "attachment": {
+    "MessageId": "a782abdf-1805-4cf8-9f11-e8631d9eeb1e",
+    "ReceiptHandle": "AQEB8XIBDnoVKva/CUwIF7y2tS1kvQee2hC8WxdI+52m9hAuO9DHSCq/WqaRFKZ4BA2w93bpcofcK9TxOf299290Dl1lS50fZMYZollmUOFnXNADJfh9zD/FP3JypfizSZ+xmOXaDBoBbNLi3hjI2LhF+BPH4+P0TkCIOlxF0jTwmT8muf3rg+zoV7rzkcMdGxTo+51Dh8CGqnVRGlQuH7vIS3QvBkvUKz2XrIKxyXHlJtqoVkCs3eI/xzrF9lwvDxCgZzg6YV0L2L1ykQDYtlRcDaQnoh7xR0a5DzDiD3LLy4U=",
+    "MD5OfBody": "1e46a790b535e20005f70d995164367a",
+    "Body": {
+      "clientName": "testClient",
+      "clientTicketNumber": "",
+      "ticketType": "Incident",
+      "ticketNumber": "e-CS0879727",
+      "attachmentName": "rocket.jpg",
+      "attachmentInfo": "https://envisiontest.service-now.com/api/now/attachment/0ded161f1b64211426a2da49b04bcb2f",
+      "attachmentSize": "138092",
+      "attachmentType": "image/jpeg",
+      "attachment": "https://envxsn2qdev1outbound-bucket.s3.us-west-1.amazonaws.com/rocket.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAYCQITFFPO5BDKNHN%2F20230127%2Fus-west-1%2Fs3%2Faws4_request&X-Amz-Date=20230127T222835Z&X-Amz-Expires=86400&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2BSIvpfyZf2YR%2BiIyT%2FxmP87uzdBTnSc5LyI0YinVY8xAX2wMFPK2Tqzkjt5pqJurX%2FRnq2q76AOCSudisgAOt1phedUz%2F78Nei70MY5L5gA2PFrkTFkXO32Zr5HlU2AKc7CMuaprcUhSl34RXbvYNkbq66G6CN3PPM7cg0Xl%2FkWehw%3D%3D&X-Amz-Signature=49694f49a3a924ae3c17eb8c7d0b855461e6c9af587404b2cf47ceef61260221&X-Amz-SignedHeaders=host",
+      "group": "Platform BPMDevandSupport"
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1674858633136",
+      "ApproximateReceiveCount": "2",
+      "SentTimestamp": "1674858515544",
+      "SequenceNumber": "18875507853688816896",
+      "MessageDeduplicationId": "8a70ca4ae915076f6d1edb2b6d07b37f86897cab4662cad6ff111be77b284547",
+      "MessageGroupId": "e-CS0879727",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Attachment"
+    }
+  },
+  "returnEnsonoNum": {
+    "MessageId": "c83bcb88-58c9-4c3c-b34a-37bd0de3279f",
+    "ReceiptHandle": "AQEB2+lKqBz2njMBWps6VpZ7Wuyx/cB/YG9NKSMnsW66yljMB42+s0WueAMcEdUgPKR2CnsJLOAfV70fuT9xDDQXlEyflpsvUvjaAbAOm0xiI8alor/A81aUHdbXiTFyFhFJzncLTwERL5hiEFrb2c439aLY4+qgbhiJFGXz1GhSArRWXcY+NYCScHHjrhAfdyQhNBZ3pJBCQAFeFqIh1rCK+yzTMIogJWh5Kd+TwKDzEezlneKRiNzC45X6UBwbf1LyTqsJVcoZ6/cdH8xX+nFBJb3FEA9Mfg5LK/K8g1hkc+s=",
+    "MD5OfBody": "4938c247db4e9170b258b6138ad2c2fd",
+    "Body": {
+      "clientName": "testClient ",
+      "ticketNumber": "e-CS0881847",
+      "clientTicketNumber": "INC1235678",
+      "ticketType": "Incident"
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPCNWDH6BTL:envxdevbridge1MainBridge",
+      "ApproximateFirstReceiveTimestamp": "1675883908676",
+      "ApproximateReceiveCount": "1",
+      "SentTimestamp": "1675883883744",
+      "SequenceNumber": "18875770347948015872",
+      "MessageDeduplicationId": "c10e950df35014765f8199ea7011608ef047e0ad62e52f7f1966123378625687",
+      "MessageGroupId": "e-CS0881847",
+      "ClientReferenceAvailable": true,
+      "TransactionType": "ReturnEnsonoNum"
+    }
+  },
+  "changeCreate": {
+    "MessageId": "6c11b270-b88f-465e-b8ba-71f712ab7f61",
+    "ReceiptHandle": "AQEBG39tqeND8aOlk08m6qmpwi2rHFyCdqT0y4pKE",
+    "MD5OfBody": "ae4c0ae9f1f7cedff3416e685ff64599",
+    "Body": {
+      "clientName": "testClient",
+      "ticketType": "Change",
+      "clientTicketNumber": "",
+      "ticketNumber": "e-CHG0032103",
+      "group": "CLIENT - Ensono Other",
+      "ensonoGroup": "Platform BPMDevandSupport",
+      "openedAt": "2023-02-08T16:25:44Z",
+      "updatedOn": "2023-02-08T16:25:48Z ",
+      "requestedByName": "Ensono User",
+      "shortDescription": "test",
+      "type": "Normal",
+      "category": "Other",
+      "approval": "requested",
+      "startDate": "2023-02-08T16:25:48Z",
+      "endDate": "2023-02-08T16:25:52Z",
+      "risk": "High",
+      "impact": "Low",
+      "description": "test",
+      "justification": "test",
+      "preChangeChecks": "test",
+      "implementationPlan": "test",
+      "testPlan": "test",
+      "backoutPlan": "test",
+      "state": "Assess",
+      "priority": "4",
+      "cis": "2000"
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1675873891617",
+      "ApproximateReceiveCount": "4",
+      "SentTimestamp": "1675873625881",
+      "SequenceNumber": "18875767721935087872",
+      "MessageDeduplicationId": "55ae5bacba7835629ec24a58f4517791d92d5",
+      "MessageGroupId": "e-CHG0032103",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Create"
+    }
+  },
+  "changeUpdate": {
+    "MessageId": "ea7e604b-b697-45e9-89c6-e2e8dc40058c",
+    "ReceiptHandle": "AQEBhSxISIxyg6nY1ioOOTHA7busJAawkUbvewo...",
+    "MD5OfBody": "bf92c2b8eae7f1951ab41eecfe2abe70",
+    "Body": {
+      "clientName": "testClient",
+      "ticketType": "Change",
+      "clientTicketNumber": "",
+      "ticketNumber": "e-CHG0032103",
+      "group": "CLIENT - Ensono Other",
+      "ensonoGroup": "Platform BPMDevandSupport",
+      "openedAt": "2023-02-08T16:25:44Z",
+      "updatedOn": "2023-02-08T16:35:44Z",
+      "requestedByName": "Ensono User",
+      "shortDescription": "test",
+      "type": "Normal",
+      "category": "Other",
+      "approval": "requested",
+      "startDate": "2023-02-08T16:25:48Z",
+      "endDate": "2023-02-08T16:25:52Z",
+      "risk": "High",
+      "impact": "Low",
+      "description": "test",
+      "justification": "test",
+      "preChangeChecks": "test",
+      "implementationPlan": "test",
+      "testPlan": "test",
+      "backoutPlan": "test",
+      "state": "Authorize",
+      "priority": "4",
+      "cis": "2000"
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1675876440401",
+      "ApproximateReceiveCount": "1",
+      "SentTimestamp": "1675875874559",
+      "SequenceNumber": "18875768297596655872",
+      "MessageDeduplicationId": "9ee98fbf2c5f7bad6e244cfa2cdf",
+      "MessageGroupId": "e-CHG0032103",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Update"
+    }
+  },
+  "changeApprovalRequest": {
+    "MessageId": "3234041c-eefe-4dd7-9eb8-cefd0d4d9da7",
+    "ReceiptHandle": "AQEBIMHq3/XhyFnvujJNfKLwKALN9JWa/...",
+    "MD5OfBody": "9ecd8092a59461b272e2cb8508a4e6cd",
+    "Body": {
+      "clientName": "testClient",
+      "ticketType": "Change",
+      "clientTicketNumber": "",
+      "ticketNumber": "e-CHG0032103",
+      "group": "CLIENT - Ensono Other",
+      "ensonoGroup": "Platform BPMDevandSupport",
+      "description": "test",
+      "state": "Assess",
+      "approvalState": "Requested",
+      "approvalId": "157efa0f1b702d1026a2da49b04bcbf4",
+      "approverName": "Default User",
+      "approverEmail": "noreply@client.com"
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1675873891617",
+      "ApproximateReceiveCount": "4",
+      "SentTimestamp": "1675873626479",
+      "SequenceNumber": "18875767722088175872",
+      "MessageDeduplicationId": "d89d7b98156d8a50a68",
+      "MessageGroupId": "e-CHG0032103",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Approval Request"
+    }
+  },
+  "changeRedraft": {
+    "MessageId": "44266d28-6cf8-4555-8cd4-295105926804",
+    "ReceiptHandle": "AQEBmbX5CIgMk9cIzKdP9YCF1TpP8oSO8kTLl7k3RWGU+n+…",
+    "MD5OfBody": "2fc0b6b363f98de45b45bfbbce4ab87f",
+    "Body": {
+      "clientName": "testClient",
+      "ticketType": "Change",
+      "clientTicketNumber": "",
+      "ticketNumber": "e-CHG0032075",
+      "group": "CLIENT - Ensono Other",
+      "ensonoGroup": "Platform BPMDevandSupport",
+      "openedAt": "2023-02-03T15:37:16Z",
+      "updatedOn": "",
+      "requestedByName": "Ensono User",
+      "shortDescription": "test",
+      "type": "Normal",
+      "category": "Other",
+      "approval": "not requested",
+      "startDate": "2023-02-10T15:37:18Z",
+      "endDate": "2023-02-10T15:37:20Z",
+      "risk": "Low",
+      "impact": "Low",
+      "description": "test",
+      "justification": "test",
+      "preChangeChecks": "test",
+      "implementationPlan": "test",
+      "testPlan": "test",
+      "backoutPlan": "test",
+      "state": "New",
+      "priority": "4",
+      "cis": "2000"
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1675877682032",
+      "ApproximateReceiveCount": "1",
+      "SentTimestamp": "1675877674804",
+      "SequenceNumber": "18875768758459375872",
+      "MessageDeduplicationId": "85597299277ed71d97ce4cf09597319a54091c7112b7f0581408269c48348175",
+      "MessageGroupId": "e-CHG0032075",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Redraft"
+    }
+  },
+  "changeAttachment": {
+    "MessageId": "e9b249e4-7916-484b-a803-f4f9e3a2a6b7",
+    "ReceiptHandle": "AQEBi9c4yTNeaXEqbtR5pPejA5QvSzEt4VZK4OWWuCxU9V4hwEUfgv...",
+    "Body": {
+      "clientName": "testClient",
+      "ticketType": "Change",
+      "clientTicketNumber": "",
+      "ticketNumber": "e-CHG0032103",
+      "group": "CLIENT - Ensono Other",
+      "ensonoGroup": "Platform BPMDevandSupport",
+      "attachmentName": "rocket.jpg",
+      "attachmentInfo": "https://envisiontest.service-now.com/api/now/attachment/22aac7831bb02d1026a2da49b04bcb36",
+      "attachmentSize": "138092",
+      "attachmentType": "image/jpeg",
+      "attachment": "https://envxsn2qdev1outbound-bucket.s3.us-west-1.amazonaws.com/rocket.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAYCQITFFPAUMR3XNB%2F20230208%2Fus-west-1%2Fs3%2Faws4_request&X-Amz-Date=20230208T172243Z&X-Amz-Expires=7200&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMSJHMEUCIHT5YgEViFSh0WzINW3C5AwGU%2BIpaEAZxgVPCDbwLAhAAiEA8RD7Q2ce8qz2VoRI6Tikv4l5xtbc8BFWo%2F%2BmZxj7jcEqhAMIexADGgw1NTUxNDI1NTU5OTgiDIYHlL5xm1iX%2FuWNDCrhAgbL7B6LkmwdJp%2BMXE8s7R111GsliJq043WLYRhatxAHtx%2FIaQT0kZtT8Tp0v4oT23m8%2FXSLM74BU2c1v1wFFB14YSkhx%2Fbvr0rZspbghVgWj%2FDglVRk0NQY9b%2FBK8i0nccwP2aWhdlYRgyLf%2FCbr6ox8FcF4i25WUsjwLOIaRinEoUBF7aX%2Bx8xseLiKhf%2FgIkM0FIukbwYMHL0KaqhSEL%2B4xd7JZ5QA0Dsrzg%2FtpI1vnMn%2B9n8yCJEZnM2nTnM9dWNUnagTZmQvpls3PJWf1F%2FtQRcqMabSFCaj7X1m0Xy55u5sbxRAHzcx%2B8yTV%2BCcoE%2FTo6S1Zj7YgmUZgPIRckRcCVBC00oiCRmaci505GhdJMpZzMpERNRoIgJHeFr%2FFTKPJ1ABm6pPdlFkte5zisqs%2BA0x6Ir4gwAf%2Bih2uyfloL2ivex5ZF83n6qtTUMG16lAs13Xju0gl30Uc1GLmbhMOG0j58GOp4BSNQX%2Fa2EkeQ5KBHTjLi1eFHxFRldB2x6F51dPo% "
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1675876963051",
+      "ApproximateReceiveCount": "1",
+      "SentTimestamp": "1675876866318",
+      "SequenceNumber": "18875768551486960128",
+      "MessageDeduplicationId": "9ae6b5f3eb5a5a0ad5dde8b7472ddd8592cfd9bd10c3fa900653843d095cf43b",
+      "MessageGroupId": "e-CHG0032103",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Attachment"
+    }
+  },
+  "changeComment": {
+    "MessageId": "23c1ab37-e15f-490d-8766-253c3fa9d9c3",
+    "ReceiptHandle": "AQEBhiE/aD0wNbB0+YTe8os9dQfIdhABGh6mu4gU0zDK20QztyOGcOzLXKEoO1iEVjqbuM",
+    "Body": {
+      "clientName": "Your Company Name",
+      "clientTicketNumber": "",
+      "ticketType": "Change",
+      "ticketNumber": "e-CHG0121177",
+      "updatedOn": "2024-01-04T18:33:35Z",
+      "notes": {
+        "type": "comment",
+        "id": "6a387a991b23b1d418ce106fbd4bcb28",
+        "body": "Test comment from Ensono",
+        "commenter": "Ensono User",
+        "commenterEmail": "ensono.user@Ensono.com"
+      }
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPIEBOQI2KM:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1704393307101",
+      "ApproximateReceiveCount": "1",
+      "SentTimestamp": "1704393264126",
+      "SequenceNumber": "18883068749325808640",
+      "MessageDeduplicationId": "ad0dbb3fe4ace2e72b14926b4ca5f74bd0d530761abc6180669f9323531ad6ee",
+      "MessageGroupId": "e-CHG0121177",
+      "AWSTraceHeader": "Root=1-6596fa2f-26cf00da43a7ed9f3036e80a;Parent=657116e5069775f4;Sampled=0;Lineage=eac5e8ee:0",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Notes"
+    }
+  },
+  "changeClosure": {
+    "MessageId": "4c38091b-5c48-4e5e-b53f-7ad6eb51fc12",
+    "ReceiptHandle": "AQEB1Ro19BykyfCqQBU9tXzE/eGmTHdg4R/pmt/6EP5t4Y9FhELPO6…",
+    "Body": {
+      "clientName": "Your Company Name",
+      "ticketType": "Change",
+      "clientTicketNumber": "",
+      "ticketNumber": "e-CHG0032103",
+      "group": "CLIENT - Ensono Other",
+      "ensonoGroup": "Platform BPMDevandSupport",
+      "openedAt": "2023-02-08T16:25:44Z",
+      "updatedOn": "",
+      "requestedByName": "Ensono User",
+      "shortDescription": "test",
+      "type": "Normal",
+      "category": "Other",
+      "approval": "approved",
+      "startDate": "2023-02-08T16:25:48Z",
+      "endDate": "2023-02-08T16:25:52Z",
+      "risk": "High",
+      "impact": "Low",
+      "description": "test",
+      "justification": "test",
+      "preChangeChecks": "test",
+      "implementationPlan": "test",
+      "testPlan": "test",
+      "backoutPlan": "test",
+      "state": "Closed",
+      "priority": "4",
+      "cis": "2000",
+      "closeNotes": "close notes text",
+      "closeCode": "Successful Outside Change Window"
+    },
+    "Attributes": {
+      "SenderId": "AROAYCQITFFPPLPIRNUQG:envxsn2qdev1SN2QBridge",
+      "ApproximateFirstReceiveTimestamp": "1675876963051",
+      "ApproximateReceiveCount": "1",
+      "SentTimestamp": "1675876955306",
+      "SequenceNumber": "18875768574267887872",
+      "MessageDeduplicationId": "730e17019d1b4ece7f92327929d8176d036ff9fa60cc0bf80027f6e64d5e6381",
+      "MessageGroupId": "e-CHG0032103",
+      "ClientReferenceAvailable": false,
+      "TransactionType": "Closure"
+    }
+  },
+  "riskAssessmentString": "completed_on:2024-01-04 19:34:23\r\n\r\nWill this change require an outage on the configuration items? Please assume redundancy is not in place.:Yes, less than 5 minutes\r\n\r\nHas the disaster recovery environment been updated with this change?:Yes\r\n\r\nIs there a requirement to update the disaster recovery environment?:Yes\r\n\r\nHow difficult is this change to back out?:Complex\r\n\r\nIs this change being implemented during the defined maintenance window?:Yes\r\n\r\nHow many resources are required to implement this change?:1 resource\r\n\r\nHas this type of change been successful in the past 3 months?:Yes\r\n\r\nDoes this change affect a critical CI or Business Service?:Not critical",
+  "riskAssessmentArray": [
+    {
+      "questionNumber": "1",
+      "questionText": "completed_on",
+      "questionAnswer": "2024-01-04 19:39:51"
+    },
+    {
+      "questionNumber": "2",
+      "questionText": "Has the disaster recovery environment been updated with this change?",
+      "questionAnswer": "Yes"
+    },
+    {
+      "questionNumber": "3",
+      "questionText": "Is there a requirement to update the disaster recovery environment?",
+      "questionAnswer": "Yes"
+    },
+    {
+      "questionNumber": "4",
+      "questionText": "How difficult is this change to back out?",
+      "questionAnswer": "Complex"
+    },
+    {
+      "questionNumber": "5",
+      "questionText": "Is this change being implemented during the defined maintenance window?",
+      "questionAnswer": "Yes"
+    },
+    {
+      "questionNumber": "6",
+      "questionText": "How many resources are required to implement this change?",
+      "questionAnswer": "1 resource"
+    },
+    {
+      "questionNumber": "7",
+      "questionText": "Has this type of change been successful in the past 3 months?",
+      "questionAnswer": "Yes"
+    },
+    {
+      "questionNumber": "8",
+      "questionText": "Will this change require an outage on the configuration items? Please assume redundancy is not in place.",
+      "questionAnswer": "Yes, less than 5 minutes"
+    },
+    {
+      "questionNumber": "9",
+      "questionText": "Does this change affect a critical CI or Business Service?",
+      "questionAnswer": "Not critical"
+    }
+  ],
+  "riskAssessmentJson": {
+    "completed_on": "2024-01-04 19:41:38",
+    "Has the disaster recovery environment been updated with this change?": "Yes",
+    "Is there a requirement to update the disaster recovery environment?": "Yes",
+    "How difficult is this change to back out?": "Complex",
+    "Is this change being implemented during the defined maintenance window?": "Yes",
+    "How many resources are required to implement this change?": "1 resource",
+    "Has this type of change been successful in the past 3 months?": "Yes",
+    "Will this change require an outage on the configuration items? Please assume redundancy is not in place.": "Yes, less than 5 minutes",
+    "Does this change affect a critical CI or Business Service?": "Not critical"
+  },
+  "changeApprove": {
+    "payload": {
+      "clientName": "Your Company Name",
+      "ticketType": "Change",
+      "clientTicketNumber": "CHG12345678",
+      "approver": "approver@clientname.com",
+      "approvalId": "{value read from queue transaction}",
+      "comments": [
+        {
+          "body": "Jason.Doe@abc.com approved Change Request CHG12345678"
+        }
+      ]
+    }
+  },
+  "changeReject": {
+    "payload": {
+      "clientName": "Your Company Name",
+      "ticketType": "Change",
+      "clientTicketNumber": "CHG12345678",
+      "approver": "approver@clientname.com",
+      "approvalId": "{value read from queue transaction}",
+      "comments": [
+        {
+          "body": "Jason.Doe@abc.com rejected this Change Request CHG00029641 due to time conflict"
+        }
+      ]
+    }
+  },
+  "changeApproveResponse": { "Response": " Approval Received Successfully" },
+  "changeRejectResponse": { "Response": " Rejection Received Successfully" },
+  "deleteResponse": {
+    "DeleteMessageResponse": {
+      "ResponseMetadata": {
+        "RequestId": "8d9a7dc2-42c5-5e95-89c4-287741bf1a2f"
+      }
+    }
+  },
+  "echoCreate": {
+    "payload": {
+      "clientName": "YourCompanyName",
+      "ticketType": "Incident",
+      "clientTicketNumber": "INC123456",
+      "priority": "4",
+      "group": "Ensono Service Desk",
+      "contactName": "John Doe",
+      "contactPhone": "800-555-1234",
+      "contactEmail": "hello@world.com",
+      "shortDescription": "test",
+      "description": "test",
+      "cis": "testCI1,testCI3,testCI6",
+      "comments": [
+        {
+          "body": "Comment 1",
+          "commenter": "Jason Doe",
+          "commenterEmail": "Jason.Doe@abc.com",
+          "commenterPhone": "555-909-2395",
+          "commentTime": "1/5/2024, 1:52:07 PM"
+        },
+        {
+          "body": "Comment 2",
+          "commenter": "Jason Doe",
+          "commenterEmail": "Jason.Doe@abc.com",
+          "commenterPhone": "555-909-2395",
+          "commentTime": "1/5/2024, 1:52:07 PM"
+        }
+      ]
+    }
+  },
+  "echoUpdate": {
+    "payload": {
+      "clientName": "YourCompanyName",
+      "ticketType": "Incident",
+      "clientTicketNumber": "INC123456",
+      "priority": "1",
+      "shortDescription": "updated short description",
+      "description": "updated description"
+    }
+  }
+}

@@ -9,15 +9,23 @@ import Skeleton from "@mui/material/Skeleton";
 import { AiOutlineFolderOpen } from "react-icons/ai";
 import { useUserRole } from "./UserContext";
 import DataArrayIcon from "@mui/icons-material/DataArray";
+import UsefulLink from "./ui/UsefulLink";
 const buttonStyle =
   "w-64 bg-cyan-500 duration-200 text-white font-semibold text-xl flex items-center px-4 py-4 rounded shadow";
-const Home = () => {
+const Home = ({ data }) => {
+  const [usefulLinks, setUsefulLinks] = useState([]);
   const [fact, setFact] = useState("");
   const role = useUserRole();
   const [isDev, setIsDev] = useState(false);
   useEffect(() => {
     setIsDev(role === "developer");
   }, [role]);
+
+  useEffect(() => {
+    if (data.length) {
+      setUsefulLinks(data);
+    }
+  }, [data]);
 
   useEffect(() => {
     fetch("https://uselessfacts.jsph.pl/api/v2/facts/random?language=en")
@@ -108,6 +116,14 @@ const Home = () => {
             Files
           </button>
         </Link>
+      </div>
+      <div className="container max-w-3xl mx-auto my-10">
+        <p className="text-3xl font-bold text-center mb-4">Useful Links</p>
+        <div className="grid grid-cols-1 divide-y-4">
+          {usefulLinks.map((link, index) => (
+            <UsefulLink key={index} link={link.url} name={link.name} />
+          ))}
+        </div>
       </div>
     </div>
   );

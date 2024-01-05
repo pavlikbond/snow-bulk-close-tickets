@@ -16,6 +16,7 @@ const QueueReader = ({ data }) => {
   const [companyDataList, setCompanyDataList] = useState([]);
 
   useEffect(() => {
+    console.log(data);
     if (data.length) {
       setCompanyDataList(data);
     }
